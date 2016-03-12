@@ -28,8 +28,36 @@
   -webkit-font-smoothing: antialiased;
 }
 
-
 .content-center {
     margin: 0 auto !important;
     float: none !important;
+}
+
+
+.msgs .topMsg {
+    text-align: center;
+}
+
+.msgs .topMsg .wlcMessage {
+    font-size: 2em;
+}
+
+
+.loginForm {
+    padding: 5em 0 !important;
+}
+
+form .active {
+    color: #B71C1C !important;
+}
+
+form input:focus {
+    border-bottom-color: #B71C1C !important;
+    box-shadow: 0 1px 0 0 #B71C1C !important;
+}
+
+footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
 }
