@@ -18,8 +18,8 @@ CREATE TABLE pessoa(
 	nome varchar(150),
     telefone varchar(20),
     sexo char(1),
+    cpf char(11) unique,    
     endereco varchar(255),
-    cpf char(11) unique,
     temPlanoSaude bool,
 	CONSTRAINT fk_pessoa_usuario FOREIGN KEY(login) REFERENCES usuario(login)
 );
