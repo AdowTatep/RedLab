@@ -14,9 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
-   
+/**
+ *
+ * @author adowt
+ */
+@WebServlet(name = "SistemaController", urlPatterns = {"/sistema"})
+public class SistemaController extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,12 +34,17 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        
+        
+        
+        
+        
         //Pega os parametros passados para fazer MVC
         String titulo = request.getParameter("titulo");
         String pagina = request.getParameter("page");
         
         //Cria o dispatcher, pega o dispatcher e faz o forward
-        RequestDispatcher rd = request.getRequestDispatcher((pagina==null || !pagina.equals("login")) ? "_layout.jsp" : "/sistema");
+        RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
         
         //Carrega os parametros no forward para saber lá na frente como funciona
         request.setAttribute("titulo", titulo);
