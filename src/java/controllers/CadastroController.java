@@ -49,11 +49,12 @@ public class CadastroController extends HttpServlet {
             usuario.setSenha(request.getParameter("senha"));
             usuario.setIsAdmin(Boolean.FALSE);
             
-            Pessoa pessoa = new Pessoa(usuario); //Passa usuario para criar pessoa com login
+            Pessoa pessoa = new Pessoa(); //Passa usuario para criar pessoa com login
+            pessoa.setUsuario(usuario);
+            pessoa.setLogin(usuario.getLogin());
             pessoa.setNome(request.getParameter("nome"));
             pessoa.setTelefone(request.getParameter("telefone"));
-            String sex=request.getParameter("sexo");
-            pessoa.setSexo(request.getParameter("sexo").charAt(0));
+            pessoa.setSexo(request.getParameter("sexo"));
             pessoa.setCpf(request.getParameter("cpf"));
             pessoa.setEndereco(request.getParameter("endereco"));
             

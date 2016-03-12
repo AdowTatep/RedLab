@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/src/java/controllers/HomeController.java</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/web/layout/cadastro/cadastro.jsp</file>
             <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/src/java/controllers/CadastroController.java</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/web/layout/home.jsp</file>
             <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/src/conf/persistence.xml</file>
         </group>
     </open-files>

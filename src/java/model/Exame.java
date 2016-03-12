@@ -20,7 +20,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,7 +27,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(catalog = "RedLab", schema = "")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Exame.findAll", query = "SELECT e FROM Exame e"),
     @NamedQuery(name = "Exame.findById", query = "SELECT e FROM Exame e WHERE e.id = :id"),

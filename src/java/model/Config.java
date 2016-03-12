@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -23,7 +22,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(catalog = "RedLab", schema = "")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Config.findAll", query = "SELECT c FROM Config c"),
     @NamedQuery(name = "Config.findById", query = "SELECT c FROM Config c WHERE c.id = :id"),

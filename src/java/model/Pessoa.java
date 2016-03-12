@@ -18,8 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,7 +26,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(catalog = "RedLab", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"cpf"})})
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
     @NamedQuery(name = "Pessoa.findByLogin", query = "SELECT p FROM Pessoa p WHERE p.login = :login"),
@@ -49,7 +46,8 @@ public class Pessoa implements Serializable {
     private String nome;
     @Column(length = 20)
     private String telefone;
-    private char sexo;
+    @Column(length = 1)
+    private String sexo;
     @Column(length = 11)
     private String cpf;
     @Column(length = 255)
@@ -61,8 +59,7 @@ public class Pessoa implements Serializable {
     @OneToOne(optional = false)
     private Usuario usuario;
 
-    public Pessoa(Usuario usuario) {
-        this.login = usuario.getLogin();
+    public Pessoa() {
     }
 
     public Pessoa(String login) {
@@ -93,11 +90,11 @@ public class Pessoa implements Serializable {
         this.telefone = telefone;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -125,7 +122,6 @@ public class Pessoa implements Serializable {
         this.temPlanoSaude = temPlanoSaude;
     }
 
-    @XmlTransient
     public List<Exame> getExameList() {
         return exameList;
     }
