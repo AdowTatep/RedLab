@@ -1,24 +1,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% 
+    <%         
+        //Pega a pagina para tratamento de arquivos especiais
+        String pagina = request.getParameter("page");
+        pagina = (pagina != null) ? "home" : pagina ;
+        
+        //Se tiver uma pagina no parametro, ele preenche o caminho com a pasta layout
+        //mais a pasta com o nome daquela pagina, se for nulo, ele quer usar o caminho default
+        String caminho = (request.getParameter("page") == null) ? "layout/"+pagina+"/" : "layout/" ;        
+        
         //Pega o titulo passado
         String titulo = request.getParameter("titulo");
         
-        //Pega a pagina para tratamento de arquivos especiais
-        String pagina = request.getParameter("page");
-        
-        //Se tiver uma pagina no parametro, ele preenche o caminho com a pasta layout
-        //E a pasta daquela pagina;
-        String caminho = (pagina == null || pagina.isEmpty()) ? "layout/" : "layout/"+pagina ;
-        
-        System.out.println(caminho);
-        
         //Se não passou nada é nulo
         //Se é nulo usa um padrão
-        titulo =  (titulo != null || !titulo.isEmpty()) ?  request.getParameter("titulo") : "RedLab Laboratório";         
-        System.out.println(titulo);
-        
+        titulo =  (titulo != null) ?  "RedLab Laboratório" : request.getParameter("titulo");         
         
         //Se não tiver nada, é o primeiro load, então carrega a home,
         //ao contrário, carrega a página que está no parâmetro       
@@ -43,13 +40,13 @@
     </head>
     <body>
         
-        <jsp:include page="<%= caminho+"header.jsp" %>" />   
+        <jsp:include page='<%= caminho+"header.jsp" %>' />   
         
-        <jsp:include page="<%= //Aqui a pagina é adicionada ao caminho mesmo ela ja tendo sido adicionada antes
+        <jsp:include page='<%= //Aqui a pagina é adicionada ao caminho mesmo ela ja tendo sido adicionada antes
                                               //No caso, cada pagina "nome.jsp" fica dentro de uma pasta com seu mesmo nome
                                               //Para organização, então, fica "padrao/pagina/pagina.jsp" por isso a reperição
-                                                caminho+pagina+".jsp" %>" />            
+                                                caminho+pagina+".jsp" %>' />            
             
-        <jsp:include page="<%= caminho+"footer.jsp" %>" />   
+        <jsp:include page='<%= caminho+"footer.jsp" %>' />   
     </body>
 </html>
