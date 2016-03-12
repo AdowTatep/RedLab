@@ -33,8 +33,12 @@ public class HomeController extends HttpServlet {
         String titulo = request.getParameter("titulo");
         String pagina = request.getParameter("page");
         
-        //Cria o dispatcher, pega o dispatcher e faz o forward
-        RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp?titulo="+titulo+"&page="+pagina+"");
+        //Cria o dispatcher, pega o dispatcher e faz o forward ?titulo="+titulo+"&page="+pagina+""
+        RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+        
+        request.setAttribute("titulo", titulo);
+        request.setAttribute("page", pagina);
+        
         rd.forward(request, response);
         
     }
