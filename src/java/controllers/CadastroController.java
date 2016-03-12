@@ -7,11 +7,20 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Pessoa;
+import model.Usuario;
+import model.dao.PessoaJpaController;
+import model.dao.UsuarioJpaController;
 
 /**
  *
@@ -31,10 +40,35 @@ public class CadastroController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        //Pega os parametros passados para fazer MVC
-        
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            
+            //Pega os parametros passados
+            Usuario usuario = new Usuario();
+            usuario.setLogin(request.getParameter("login"));
+            usuario.setSenha(request.getParameter("senha"));
+            usuario.setIsAdmin(Boolean.FALSE);
+            
+            Pessoa pessoa = new Pessoa(usuario); //Passa usuario para criar pessoa com login
+            pessoa.setNome(request.getParameter("nome"));
+            pessoa.setTelefone(request.getParameter("telefone"));
+            String sex=request.getParameter("sexo");
+            pessoa.setSexo(request.getParameter("sexo").charAt(0));
+            pessoa.setCpf(request.getParameter("cpf"));
+            pessoa.setEndereco(request.getParameter("endereco"));
+            
+            //Cria uma conexao
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
+            //Tenta inserir no banco
+            new UsuarioJpaController(emf).create(usuario);
+            new PessoaJpaController(emf).create(pessoa);
+            
+            //Retorna para o login(não passou parametro então é login)
+            RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+            rd.forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 

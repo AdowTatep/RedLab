@@ -1,7 +1,7 @@
 <section class="row">
     <div class="cadastroForm col s12 m5 content-center ">
         <div class="card">            
-            <form method="POST" action="home" class="">
+            <form method="POST" action="cadastro" class="">
                 <div class="card-content">
 
                     <div class="content-center msgs">
@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="input-field col s12 m6">
 
-                            <input  id="loginCampo" type="text" class="validate" name="login">
+                            <input  id="loginCampo" type="text" class="validate" name="login" maxlength="20">
 
                             <label for="loginCampo">Login</label>
 
@@ -21,7 +21,7 @@
                             
                         <div class="input-field col s12 m6">
 
-                            <input  id="senhaCampo" type="password" class="validate" name="senha">
+                            <input  id="senhaCampo" type="password" class="validate" name="senha" maxlength="50">
 
                             <label for="senhaCampo">Senha</label>
 
@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="input-field col s12">
 
-                            <input  id="nomeCampo" type="text" class="validate" name="nome">
+                            <input  id="nomeCampo" type="text" class="validate" name="nome" maxlength="150">
 
                             <label for="nomeCampo">Nome</label>
 
@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="input-field col s12 m8">
 
-                            <input  id="telefoneCampo" type="text" class="validate" name="telefone">
+                            <input  id="telefoneCampo" type="text" class="validate" name="telefone" maxlength="20">
 
                             <label for="telefoneCampo">Telefone</label>
 
@@ -55,7 +55,7 @@
                         
                         <div class="input-field col s12 m4">
 
-                            <select id="sexoCampo">
+                            <select id="sexoCampo" name="sexo">
                                 <option value="" disabled selected>Sexo</option>
                                 <option value="M" >Masculino</option>
                                 <option value="F" >Feminino</option>
@@ -69,7 +69,7 @@
                     <div class="row">
                         <div class="input-field col s12">
 
-                            <input  id="cpfCampo" type="text" class="validate" name="cpf">
+                            <input  id="cpfCampo" type="text" class="validate" name="cpf" maxlength="11">
 
                             <label for="cpfCampo">CPF</label>
 
@@ -79,7 +79,7 @@
                     <div class="row">
                         <div class="input-field col s12">
 
-                            <input  id="enderecoCampo" type="text" class="validate" name="endereco">
+                            <input  id="enderecoCampo" type="text" class="validate" name="endereco" maxlength="255">
 
                             <label for="enderecoCampo">Endereço</label>
 

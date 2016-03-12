@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="input-field col s12">
 
-                                <input  id="loginCampo" type="text" class="validate" name="login">
+                                <input  id="loginCampo" type="text" class="validate" name="login" maxlength="20">
 
                                 <label for="loginCampo">Login</label>
 
@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="input-field col s12">
 
-                                <input  id="senhaCampo" type="password" class="validate" name="senha">
+                                <input  id="senhaCampo" type="password" class="validate" name="senha" maxlength="50">
 
                                 <label for="senhaCampo">Senha</label>
 

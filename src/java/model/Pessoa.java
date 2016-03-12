@@ -49,7 +49,7 @@ public class Pessoa implements Serializable {
     private String nome;
     @Column(length = 20)
     private String telefone;
-    private Character sexo;
+    private char sexo;
     @Column(length = 11)
     private String cpf;
     @Column(length = 255)
@@ -61,7 +61,8 @@ public class Pessoa implements Serializable {
     @OneToOne(optional = false)
     private Usuario usuario;
 
-    public Pessoa() {
+    public Pessoa(Usuario usuario) {
+        this.login = usuario.getLogin();
     }
 
     public Pessoa(String login) {
@@ -92,11 +93,11 @@ public class Pessoa implements Serializable {
         this.telefone = telefone;
     }
 
-    public Character getSexo() {
+    public char getSexo() {
         return sexo;
     }
 
-    public void setSexo(Character sexo) {
+    public void setSexo(char sexo) {
         this.sexo = sexo;
     }
 
