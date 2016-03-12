@@ -7,6 +7,9 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.rmi.ServerException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
@@ -41,36 +44,134 @@ public class CadastroController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            response.setContentType("text/html;charset=UTF-8");
+            response.setContentType("text/html;charset=UTF-8"); 
             
-            //Pega os parametros passados
-            Usuario usuario = new Usuario();
-            usuario.setLogin(request.getParameter("login"));
-            usuario.setSenha(request.getParameter("senha"));
-            usuario.setIsAdmin(Boolean.FALSE);
+            ArrayList<String> errors = new ArrayList<>();
             
-            Pessoa pessoa = new Pessoa(); //Passa usuario para criar pessoa com login
-            pessoa.setUsuario(usuario);
-            pessoa.setLogin(usuario.getLogin());
-            pessoa.setNome(request.getParameter("nome"));
-            pessoa.setTelefone(request.getParameter("telefone"));
-            pessoa.setSexo(request.getParameter("sexo"));
-            pessoa.setCpf(request.getParameter("cpf"));
-            pessoa.setEndereco(request.getParameter("endereco"));
+            //Preenche o usuario
+            Usuario usuario = createUsuarioUsingParameters(request);
             
-            //Cria uma conexao
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
-            //Tenta inserir no banco
-            new UsuarioJpaController(emf).create(usuario);
-            new PessoaJpaController(emf).create(pessoa);
-            
-            //Retorna para o login(não passou parametro então é login)
-            RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
-            rd.forward(request, response);
+            //Testa se os campos foram preenchidos corretamente
+            if(validaCamposCadastro(request, errors)){
+               //Retorna ao cadastro
+               RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+               request.setAttribute("page", "cadastro");
+               request.setAttribute("errors", errors);
+               rd.forward(request, response); 
+            } else {
+               //Cria uma conexao
+               EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLab");
+               //Tenta inserir no banco
+               new UsuarioJpaController(emf).create(usuario);
+               new PessoaJpaController(emf).create(createPessoaUsingParameters(request, usuario));
+
+               //Retorna para o login(não passou parametro então é login)
+               RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+               rd.forward(request, response);   
+            }
         } catch (Exception ex) {
-            Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
+            ArrayList<String> errors = new ArrayList<>();
+            errors = (ArrayList<String>) request.getAttribute("errors");
+            
+            RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+            request.setAttribute("page", "cadastro");
+            request.setAttribute("errors", errors);
+            rd.forward(request, response);
         }
         
+    }
+    
+    protected boolean validaCamposCadastro(HttpServletRequest request, List<String> errors){
+        try {
+            boolean temErro = false;
+            Usuario usuario = createUsuarioUsingParameters(request);
+            Pessoa pessoa = createPessoaUsingParameters(request, usuario);
+            
+            if(usuario.getLogin().equals("")  || usuario.getLogin()==null){
+                temErro = true;
+                errors.add("Usuário precisa ser preenchido");
+            } 
+            //Eu testo se é maior que 20 mesmo sendo limitado no html
+            //Pois a pessoa pode ir no html e alterar o valor
+            else if(usuario.getLogin().length()>20) {
+                temErro = true;
+                errors.add("Usuário não pode ter mais que 20 caracteres");
+            }
+            
+            if(usuario.getSenha().equals("") || usuario.getSenha()==null){
+                temErro = true;
+                errors.add("Senha precisa ser preenchida");
+            }
+            
+            //Eu testo se é maior que 50 mesmo sendo limitado no html
+            //Pois a pessoa pode ir no html e alterar o valor
+            if(usuario.getSenha().length()>50) {
+                temErro = true;
+                errors.add("A senha não pode ter mais que 50 caracteres");
+            } else if(usuario.getSenha().length()<6){
+                temErro = true;
+                errors.add("A senha precisa ter pelo menos 6 caracteres");
+            }
+            
+            if(pessoa.getNome().equals("")  || pessoa.getNome()==null){
+                temErro = true;
+                errors.add("O nome não pode estar vazio");
+            } else if(pessoa.getNome().length()>150){
+                temErro = true;
+                errors.add("O nome pode ter no máximo 150 caracteres");
+            }
+            
+            if(pessoa.getTelefone().equals("")  || pessoa.getTelefone()==null){
+                temErro = true;
+                errors.add("O telefone precisa ser preenchido");
+            } else if (pessoa.getTelefone().length()>20) {
+                temErro = true;
+                errors.add("O telefone só pode ter no máximo 20 caracteres");
+            } else if (pessoa.getTelefone().length()<8) {
+                temErro = true;
+                errors.add("O telefone precisa ter no mínimo 8 caracteres");
+            }
+            
+            if(pessoa.getSexo().equals("") || !pessoa.getSexo().equals("M") || !pessoa.getSexo().equals("F")  || pessoa.getSexo()==null){
+                temErro = true;
+                errors.add("O valor do sexo é inválido");
+            }
+            
+            if (pessoa.getCpf().equals("") || pessoa.getCpf() == null) {
+                temErro = true;
+                errors.add("CPF não pode estar vazio");
+            } else if(pessoa.getCpf().length() != 11){
+                temErro = true;
+                errors.add("O campo CPF precisa ter 11 caracteres");
+            }
+            
+            if (pessoa.getEndereco().length()>255) {
+                temErro = true;
+                errors.add("Seu endereço precisa ter até 255 caracteres");
+            }
+            
+            return temErro;
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
+            return true;
+        }
+    }
+    
+    protected Usuario createUsuarioUsingParameters(HttpServletRequest request) throws Exception{       
+        Usuario usuario = new Usuario();
+        usuario.setLogin(request.getParameter("login"));
+        usuario.setSenha(request.getParameter("senha"));
+        return usuario;
+    }
+    
+    protected Pessoa createPessoaUsingParameters(HttpServletRequest request, Usuario usuario) throws Exception{        
+        Pessoa pessoa = new Pessoa(usuario); //Passa usuario para criar pessoa com login
+        pessoa.setNome(request.getParameter("nome"));
+        pessoa.setTelefone(request.getParameter("telefone"));
+        pessoa.setSexo(request.getParameter("sexo"));
+        pessoa.setCpf(request.getParameter("cpf"));
+        pessoa.setEndereco(request.getParameter("endereco"));
+        return pessoa;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
     <%         
+        
         //Pega a pagina para tratamento de arquivos especiais
         String pagina = request.getParameter("page");
         pagina = (pagina != null) ? pagina : "home" ;
@@ -40,12 +41,14 @@
     </head>
     <body>
         
-        <jsp:include page='<%= "layout/header.jsp" %>' />   
+        <jsp:include page='<%= "layout/header.jsp" %>' />      
         
         <jsp:include page='<%= //Aqui a pagina é adicionada ao caminho mesmo ela ja tendo sido adicionada antes
                                               //No caso, cada pagina "nome.jsp" fica dentro de uma pasta com seu mesmo nome
                                               //Para organização, então, fica "padrao/pagina/pagina.jsp" por isso a reperição
-                                                caminho+pagina+".jsp" %>' />            
+                                                caminho+pagina+".jsp" %>' >  
+            <jsp:param name="errorMsg" value='<%= request.getParameter("errors") %>' />
+        </jsp:include>
             
         <jsp:include page='<%= "layout/footer.jsp" %>' />   
     </body>

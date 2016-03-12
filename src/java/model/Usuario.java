@@ -42,6 +42,7 @@ public class Usuario implements Serializable {
     private Pessoa pessoa;
 
     public Usuario() {
+        this.isAdmin = false;
     }
 
     public Usuario(String login) {

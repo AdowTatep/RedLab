@@ -8,6 +8,15 @@
                         <div class="topMsg">
                             <span class="wlcMessage">Cadastro de usuário</span>
                         </div>
+                        <%
+                            if(request.getParameter("errorMsg")!=null && !request.getParameter("errorMsg").equals("null") ){
+                             %>                             
+                             <div class="errorMsg">
+                                <span>Houve um erro: <%= request.getParameter("errorMsg") %></span>
+                             </div>
+                             <%
+                            }
+                        %>
                     </div>
 
                     <div class="row">

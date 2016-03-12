@@ -60,6 +60,13 @@ public class Pessoa implements Serializable {
     private Usuario usuario;
 
     public Pessoa() {
+        this.temPlanoSaude = false;
+    }
+    
+    public Pessoa(Usuario usuario) {
+        this.temPlanoSaude = false;
+        this.usuario = usuario;
+        this.login = usuario.getLogin();
     }
 
     public Pessoa(String login) {
