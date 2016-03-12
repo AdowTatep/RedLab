@@ -7,7 +7,6 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adowt
  */
-@WebServlet(name = "SistemaController", urlPatterns = {"/sistema"})
-public class SistemaController extends HttpServlet {
+@WebServlet(name = "CadastroController", urlPatterns = {"/cadastro"})
+public class CadastroController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +34,7 @@ public class SistemaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         //Pega os parametros passados para fazer MVC
-        String titulo = request.getParameter("titulo");
-        String pagina = request.getParameter("page");
         
-        //Cria o dispatcher, pega o dispatcher e faz o forward
-        RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
-        
-        //Carrega os parametros no forward para saber lá na frente como funciona
-        request.setAttribute("titulo", titulo);
-        request.setAttribute("page", pagina);
-        
-        rd.forward(request, response);
         
     }
 
