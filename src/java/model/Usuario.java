@@ -15,6 +15,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -44,6 +45,11 @@ public class Usuario implements Serializable {
     public Usuario() {
         this.isAdmin = false;
     }
+    
+    public Usuario(HttpServletRequest request) {
+        this.isAdmin = false;
+        this.populateUsuarioUsingParameters(request);
+    }
 
     public Usuario(String login) {
         this.login = login;
@@ -52,6 +58,11 @@ public class Usuario implements Serializable {
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
+    }
+    
+    public void populateUsuarioUsingParameters(HttpServletRequest request){       
+        this.setLogin((request.getParameter("login") == null) ? "" : request.getParameter("login"));
+        this.setSenha((request.getParameter("senha") == null) ? "" : request.getParameter("senha"));
     }
 
     public String getLogin() {

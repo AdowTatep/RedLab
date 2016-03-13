@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -72,7 +73,22 @@ public class Pessoa implements Serializable {
     public Pessoa(String login) {
         this.login = login;
     }
-
+    
+    public Pessoa(HttpServletRequest request, Usuario usuario) {
+        this.temPlanoSaude = false;
+        this.populatePessoaUsingParameters(request, usuario);
+    }
+    
+    private void populatePessoaUsingParameters(HttpServletRequest request, Usuario usuario) {        
+        this.setLogin(usuario.getLogin());
+        this.setUsuario(usuario);
+        this.setNome((request.getParameter("nome") == null) ? "" : request.getParameter("nome"));
+        this.setTelefone((request.getParameter("telefone")==null) ? "" : request.getParameter("telefone") );
+        this.setSexo((request.getParameter("sexo")==null) ? "" : request.getParameter("sexo"));
+        this.setCpf((request.getParameter("cpf")==null) ? "":request.getParameter("cpf"));
+        this.setEndereco((request.getParameter("endereco")==null) ? "": request.getParameter("endereco"));
+    }
+    
     public String getLogin() {
         return login;
     }

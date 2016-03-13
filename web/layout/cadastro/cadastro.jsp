@@ -7,12 +7,14 @@
                     <div class="content-center msgs">
                         <div class="topMsg">
                             <span class="wlcMessage">Cadastro de usuário</span>
+                            <h1><%= titulo %></h1>
                         </div>
                         <%
-                            if(request.getParameter("errorMsg")!=null && !request.getParameter("errorMsg").equals("null") ){
+                            //Ainda não funcional, não é possivel pegar esse array de erros ainda
+                            if(request.getParameter("errors")!=null ){
                              %>                             
                              <div class="errorMsg">
-                                <span>Houve um erro: <%= request.getParameter("errorMsg") %></span>
+                                <span>Houve um erro: <%= request.getParameter("errors") %></span>
                              </div>
                              <%
                             }

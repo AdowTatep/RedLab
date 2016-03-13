@@ -49,7 +49,7 @@ public class CadastroController extends HttpServlet {
             ArrayList<String> errors = new ArrayList<>();
             
             //Preenche o usuario
-            Usuario usuario = createUsuarioUsingParameters(request);
+            Usuario usuario = new Usuario(request);
             
             //Testa se os campos foram preenchidos corretamente
             if(validaCamposCadastro(request, errors)){
@@ -60,10 +60,10 @@ public class CadastroController extends HttpServlet {
                rd.forward(request, response); 
             } else {
                //Cria uma conexao
-               EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLab");
+               EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
                //Tenta inserir no banco
                new UsuarioJpaController(emf).create(usuario);
-               new PessoaJpaController(emf).create(createPessoaUsingParameters(request, usuario));
+               new PessoaJpaController(emf).create(new Pessoa(request, usuario));
 
                //Retorna para o login(não passou parametro então é login)
                RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
@@ -84,8 +84,8 @@ public class CadastroController extends HttpServlet {
     protected boolean validaCamposCadastro(HttpServletRequest request, List<String> errors){
         try {
             boolean temErro = false;
-            Usuario usuario = createUsuarioUsingParameters(request);
-            Pessoa pessoa = createPessoaUsingParameters(request, usuario);
+            Usuario usuario = new Usuario(request);
+            Pessoa pessoa = new Pessoa(request, usuario);
             
             if(usuario.getLogin().equals("")  || usuario.getLogin()==null){
                 temErro = true;
@@ -132,7 +132,7 @@ public class CadastroController extends HttpServlet {
                 errors.add("O telefone precisa ter no mínimo 8 caracteres");
             }
             
-            if(pessoa.getSexo().equals("") || !pessoa.getSexo().equals("M") || !pessoa.getSexo().equals("F")  || pessoa.getSexo()==null){
+            if(pessoa.getSexo()==null || pessoa.getSexo().equals("") || !pessoa.getSexo().equals("M") || !pessoa.getSexo().equals("F")){
                 temErro = true;
                 errors.add("O valor do sexo é inválido");
             }
@@ -157,24 +157,8 @@ public class CadastroController extends HttpServlet {
         }
     }
     
-    protected Usuario createUsuarioUsingParameters(HttpServletRequest request) throws Exception{       
-        Usuario usuario = new Usuario();
-        usuario.setLogin(request.getParameter("login"));
-        usuario.setSenha(request.getParameter("senha"));
-        return usuario;
-    }
-    
-    protected Pessoa createPessoaUsingParameters(HttpServletRequest request, Usuario usuario) throws Exception{        
-        Pessoa pessoa = new Pessoa(usuario); //Passa usuario para criar pessoa com login
-        pessoa.setNome(request.getParameter("nome"));
-        pessoa.setTelefone(request.getParameter("telefone"));
-        pessoa.setSexo(request.getParameter("sexo"));
-        pessoa.setCpf(request.getParameter("cpf"));
-        pessoa.setEndereco(request.getParameter("endereco"));
-        return pessoa;
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

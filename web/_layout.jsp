@@ -1,14 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%         
-        
-        //Pega a pagina para tratamento de arquivos especiais
+    <%                 
+        //Pega o parametro pagina para saber qual página redirecionar
         String pagina = request.getParameter("page");
+        
+        //Se não tiver nada, quer dizer que ele quer a página inicial, se tiver, ele coloca o nome
         pagina = (pagina != null) ? pagina : "home" ;
         
         //Se tiver uma pagina no parametro, ele preenche o caminho com a pasta layout
-        //mais a pasta com o nome daquela pagina, se for nulo, ele quer usar o caminho default
+        //+ a pasta que no padrao criado tem o mesmo nome da pagina
+        //se for nulo, ele quer usar o caminho default contendo só layout
         String caminho = (request.getParameter("page") == null) ? "layout/" : "layout/"+pagina+"/" ;
         
         //Pega o titulo passado
@@ -18,9 +20,8 @@
         //Se é nulo usa um padrão
         titulo =  (titulo != null) ?  request.getParameter("titulo") : "RedLab Laboratório" ;         
         
-        //Se não tiver nada, é o primeiro load, então carrega a home,
-        //ao contrário, carrega a página que está no parâmetro       
-        
+        //Se não tiver nada no atributo page, é o primeiro load, então carrega a home,
+        //ao contrário, carrega a página que está no parâmetro
      %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -45,10 +46,8 @@
         
         <jsp:include page='<%= //Aqui a pagina é adicionada ao caminho mesmo ela ja tendo sido adicionada antes
                                               //No caso, cada pagina "nome.jsp" fica dentro de uma pasta com seu mesmo nome
-                                              //Para organização, então, fica "padrao/pagina/pagina.jsp" por isso a reperição
-                                                caminho+pagina+".jsp" %>' >  
-            <jsp:param name="errorMsg" value='<%= request.getParameter("errors") %>' />
-        </jsp:include>
+                                              //Para organização, então, fica "padrao/pagina/pagina.jsp" por isso a repetição
+                                                caminho+pagina+".jsp" %>' />  
             
         <jsp:include page='<%= "layout/footer.jsp" %>' />   
     </body>
