@@ -38,7 +38,7 @@ public class HomeController extends HttpServlet {
         String titulo = request.getParameter("titulo");
         String pagina = request.getParameter("page");
         
-        if(pagina.equals("login"))
+        if( pagina != null && pagina.equals("login"))
             rd=request.getRequestDispatcher("/sistema");
             
         //Coloca o título padrão

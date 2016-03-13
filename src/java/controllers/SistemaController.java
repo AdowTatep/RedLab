@@ -40,7 +40,7 @@ public class SistemaController extends HttpServlet {
 
         //Pega os parametros passados para fazer MVC
         String titulo = request.getParameter("titulo");
-        String pagina = request.getParameter("page");
+        String pagina = null;
 
         //Se pagina for login ele pega o campo digitado no formulário de usuario e preenche
         Usuario usuario = new Usuario(request);
@@ -55,7 +55,7 @@ public class SistemaController extends HttpServlet {
                 && (usuarioEncontrado.getSenha().equals(usuario.getSenha()))
                 && (usuarioEncontrado.getLogin().equals(usuario.getLogin()))) {
             //Então redireciona para dentro do sistema
-            pagina = (usuario.getIsAdmin()) ? "admin" : "usuario" ;
+            pagina = (usuarioEncontrado.getIsAdmin()) ? "admin" : "usuario" ;
         } 
 
         //Cria o dispatcher, pega o dispatcher e faz o forward
