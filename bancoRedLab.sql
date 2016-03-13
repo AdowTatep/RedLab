@@ -41,5 +41,17 @@ INSERT INTO usuario VALUES(
 );
 
 INSERT INTO pessoa VALUES(
-	'admin', 'Administrador', '', 'M', '', '99999999999', true
+	'admin', 'Administrador', '', 'M', '99999999999', 'Rua administrador', true
 );
+
+INSERT INTO usuario VALUES(
+	'login', 'senha', false
+);
+
+INSERT INTO pessoa VALUES(
+	'login', 'Usuário', '12345678', 'M', '11111111111', 'Rua usuário', false
+);
+
+INSERT INTO exame VALUES
+	(1, 50.00, 'Radiografia', null, '2016-02-18', '14:24:44', 1, 'login'),
+    (2, 10.00, 'Exame de sangue', '07:00:00', '2016-02-27', '16:10:34', 0, 'login');

@@ -6,13 +6,18 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Exame;
 import model.Usuario;
+import model.dao.ExameJpaController;
 
 /**
  *
@@ -50,10 +55,14 @@ public class AdminController extends HttpServlet {
         //Se é nulo usa um padrão
         String titulo = "Admin - "+usuario.getLogin();
         
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
+        List<Exame> exames = new ExameJpaController(emf).findExameEntities();        
+        
         request.setAttribute("usuario", usuario);
         request.setAttribute("page", pagina);
         request.setAttribute("titulo", titulo);
         request.setAttribute("path", caminho);
+        request.setAttribute("exames", exames);        
         
         rd.forward(request, response);        
     }

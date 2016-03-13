@@ -60,6 +60,14 @@ form input:focus {
     color: #B71C1C;
 }
 
+.checkGreen {
+    color: #4caf50 !important;
+}
+
+.cancelRed {
+    color: #B71C1C !important;
+}
+
 footer {
     position:absolute;
     bottom:0;
