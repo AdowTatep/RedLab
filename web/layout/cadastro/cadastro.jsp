@@ -1,17 +1,18 @@
-<%@page import="controllers.Mensagem"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="controllers.Mensagem"%>
 <section class="row">
     <div class="cadastroForm col s12 m5 content-center ">
         <div class="card">            
             <form method="POST" action="cadastro" class="">
                 <div class="card-content">
-
                     <div class="content-center msgs">
                         <div class="topMsg">
                             <span class="wlcMessage">Cadastro de usuário</span>
                         </div>
-                        <%                            
+                            
+                        <%    
                             ArrayList<Mensagem> msgs = (ArrayList<Mensagem>)request.getAttribute("msgs");     
+                            
                             for (Mensagem msg : msgs) {
                                 if(msg.getTipo().equals("erro")){
                                     %>
@@ -20,6 +21,7 @@
                                 }
                             }
                         %>
+                        
                     </div>
 
                     <div class="row">

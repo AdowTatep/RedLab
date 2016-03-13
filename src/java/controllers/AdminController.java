@@ -6,9 +6,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,15 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Usuario;
-import model.dao.PessoaJpaController;
-import model.dao.UsuarioJpaController;
 
 /**
  *
  * @author adowt
  */
-@WebServlet(name = "SistemaController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "AdminController", urlPatterns = {"/admin"})
+public class AdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,43 +34,28 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        //Cria o dispatcher, pega o dispatcher e faz o forward
-        RequestDispatcher rd = request.getRequestDispatcher("/home");
+        RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
         
-         //Se não achar o usuário, quer voltar para a home então já seta
-         //Pois se achar usuario, este atributo será alterado
-        String pagina = "home";
-
-        //Pega o login preenchido
-        Usuario usuario = new Usuario(request);
-
-        //Cria uma conexao e tenta achar se o usuario digitado existe
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
-        Usuario usuarioEncontrado = new UsuarioJpaController(emf).findUsuario(usuario.getLogin());
-
-        //Se não achar nada ele é nulo então já sai
-        //Se achar, verifica se o login e senha realmente são como o digitado
-        if (usuarioEncontrado != null
-                && (usuarioEncontrado.getSenha().equals(usuario.getSenha()))
-                && (usuarioEncontrado.getLogin().equals(usuario.getLogin()))) {
-            //Então redireciona para dentro do sistema de acordo com seu tipo
-            pagina = (usuarioEncontrado.getIsAdmin()) ? "admin" : "usuario" ;
-            
-            //Preenche o usuario com todas as suas informações
-            usuario = usuarioEncontrado;
-            usuario.setPessoa(new PessoaJpaController(emf).findPessoa(usuario.getLogin()));
-            
-            //Passa o usuário como atributo
-            request.setAttribute("usuario", usuario);            
-            //Muda a página carregada em questão
-            rd = request.getRequestDispatcher("/"+pagina);
-        } 
+        //Pega o usuario para trabalhar
+        Usuario usuario = (Usuario)request.getAttribute("usuario");
         
-        //Carrega os parametros no forward para saber lá na frente como funciona
+        //Pega qual página quer ser acessada, e gera o caminho customizado
+        Helpers help = new Helpers();
+        
+        String pagina = "admin";
+        String caminho = help.geraCaminho(pagina);
+        
+        //Pega o titulo passado
+        //Se não passou nada é nulo
+        //Se é nulo usa um padrão
+        String titulo = "Admin - "+usuario.getLogin();
+        
+        request.setAttribute("usuario", usuario);
         request.setAttribute("page", pagina);
-
-        rd.forward(request, response);
-
+        request.setAttribute("titulo", titulo);
+        request.setAttribute("path", caminho);
+        
+        rd.forward(request, response);        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
