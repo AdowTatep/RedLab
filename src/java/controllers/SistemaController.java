@@ -7,12 +7,16 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Usuario;
+import model.dao.UsuarioJpaController;
 
 /**
  *
@@ -33,20 +37,36 @@ public class SistemaController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         //Pega os parametros passados para fazer MVC
         String titulo = request.getParameter("titulo");
         String pagina = request.getParameter("page");
-        
+
+        //Se pagina for login ele pega o campo digitado no formulário de usuario e preenche
+        Usuario usuario = new Usuario(request);
+
+        //Cria uma conexao e tenta achar o usuario digitado na tabela
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
+        Usuario usuarioEncontrado = new UsuarioJpaController(emf).findUsuario(usuario.getLogin());
+
+        //Se não achar nada ele é nulo então já sai
+        //Se achar, verifica se o login e senha realmente são como o digitado
+        if (usuarioEncontrado != null
+                && (usuarioEncontrado.getSenha().equals(usuario.getSenha()))
+                && (usuarioEncontrado.getLogin().equals(usuario.getLogin()))) {
+            //Então redireciona para dentro do sistema
+            pagina = (usuario.getIsAdmin()) ? "admin" : "usuario" ;
+        } 
+
         //Cria o dispatcher, pega o dispatcher e faz o forward
         RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
-        
+
         //Carrega os parametros no forward para saber lá na frente como funciona
-        request.setAttribute("titulo", "kakakaka");
-        request.setAttribute("page", "cadastro");
-        
+        request.setAttribute("titulo", titulo);
+        request.setAttribute("page", pagina);
+
         rd.forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
