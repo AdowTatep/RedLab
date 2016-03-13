@@ -9,7 +9,7 @@
         //Se tiver uma pagina no parametro, ele preenche o caminho com a pasta layout
         //+ a pasta que no padrao criado tem o mesmo nome da pagina
         //se for nulo, ele quer usar o caminho default contendo só layout
-        String caminho = (request.getParameter("page") == null || pagina.equals("home")) ? "layout/" : "layout/"+pagina+"/" ;
+            String caminho = (request.getParameter("page") == null || pagina.equals("home")) ? "layout/" : "layout/"+pagina+"/" ;
         
         //Pega o titulo passado
         String titulo = request.getParameter("titulo");

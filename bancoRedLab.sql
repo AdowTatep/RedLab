@@ -17,8 +17,8 @@ CREATE TABLE pessoa(
     login varchar(20) primary key,
 	nome varchar(150),
     telefone varchar(20),
-    sexo char(1),
-    cpf char(11) unique,    
+    sexo varchar(1),
+    cpf varchar(11) unique,    
     endereco varchar(255),
     temPlanoSaude bool,
 	CONSTRAINT fk_pessoa_usuario FOREIGN KEY(login) REFERENCES usuario(login)
