@@ -6,9 +6,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,23 +32,23 @@ public class HomeController extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
         
         //Pega qual página quer ser acessada, e o caminho customizado
-        String pagina = geraPagina(request.getParameter("page"));
+        String pagina = geraPagina((String)request.getAttribute("page"));
         String caminho = geraCaminho(pagina);
         
         //Pega o titulo passado
         //Se não passou nada é nulo
         //Se é nulo usa um padrão
-        String titulo = request.getParameter("titulo");
-        titulo =  (titulo != null) ?  request.getParameter("titulo") : "RedLab Laboratório" ;        
+        String titulo = (String)request.getAttribute("titulo");
+        titulo =  (titulo != null) ?  (String)request.getAttribute("titulo") : "RedLab Laboratório" ;        
         
-        if( pagina != null && pagina.equals("login"))
+        if (pagina != null && pagina.equals("login"))
             rd=request.getRequestDispatcher("/sistema");
             
         //Coloca o título padrão
         request.setAttribute("titulo", titulo);
         request.setAttribute("page", pagina);
         request.setAttribute("path", caminho);
-        
+                
         //No final, redireciona
         rd.forward(request, response);        
     }

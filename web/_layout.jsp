@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html>
     <%                         
-        String pagina = request.getParameter("page");
-        String caminho = request.getParameter("path");
-        String titulo = request.getParameter("titulo");        
+        String pagina = (String) request.getAttribute("page");
+        String caminho = (String) request.getAttribute("path");
+        String titulo = (String) request.getAttribute("titulo");        
      %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

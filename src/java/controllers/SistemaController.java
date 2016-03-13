@@ -39,7 +39,7 @@ public class SistemaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         //Pega os parametros passados para fazer MVC
-        String titulo = request.getParameter("titulo");
+        String titulo = (String) request.getAttribute("titulo");
         String pagina = null;
 
         //Se pagina for login ele pega o campo digitado no formulário de usuario e preenche

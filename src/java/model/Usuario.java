@@ -61,8 +61,8 @@ public class Usuario implements Serializable {
     }
     
     public void populateUsuarioUsingParameters(HttpServletRequest request){       
-        this.setLogin((request.getParameter("login") == null) ? "" : request.getParameter("login"));
-        this.setSenha((request.getParameter("senha") == null) ? "" : request.getParameter("senha"));
+        this.setLogin(((String)request.getAttribute("login") == null) ? "" : (String)request.getAttribute("login"));
+        this.setSenha(((String)request.getAttribute("senha") == null) ? "" : (String)request.getAttribute("senha"));
     }
 
     public String getLogin() {
