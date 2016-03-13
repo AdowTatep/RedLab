@@ -62,10 +62,8 @@ public class SistemaController extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
 
         //Carrega os parametros no forward para saber lá na frente como funciona
-        request.removeAttribute("page");
-        request.removeAttribute("titulo");
-        request.setAttribute("titulo", "Chocolate");
-        request.setAttribute("page", "Banana");
+        request.setAttribute("titulo", titulo);
+        request.setAttribute("page", pagina);
 
         rd.forward(request, response);
 

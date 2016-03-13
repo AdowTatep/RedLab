@@ -34,9 +34,15 @@ public class HomeController extends HttpServlet {
         
         RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
         
-        //Pega os parametros passados para fazer MVC
+        //Pega qual página quer ser acessada, e o caminho customizado
+        String pagina = geraPagina(request.getParameter("page"));
+        String caminho = geraCaminho(pagina);
+        
+        //Pega o titulo passado
+        //Se não passou nada é nulo
+        //Se é nulo usa um padrão
         String titulo = request.getParameter("titulo");
-        String pagina = request.getParameter("page");
+        titulo =  (titulo != null) ?  request.getParameter("titulo") : "RedLab Laboratório" ;        
         
         if( pagina != null && pagina.equals("login"))
             rd=request.getRequestDispatcher("/sistema");
@@ -44,10 +50,23 @@ public class HomeController extends HttpServlet {
         //Coloca o título padrão
         request.setAttribute("titulo", titulo);
         request.setAttribute("page", pagina);
+        request.setAttribute("path", caminho);
         
         //No final, redireciona
-        rd.forward(request, response);
-        
+        rd.forward(request, response);        
+    }
+    
+    private String geraPagina(String pageParam){
+        //Se não tiver nada, quer dizer que ele quer a página inicial, se tiver, ele coloca o nome da página
+        //Para buscar no caminho e então carregar esta página diferente
+        return (pageParam==null || pageParam.equals("")) ? "home" : pageParam ;
+    }
+    
+    private String geraCaminho(String pageParam){
+        //Se tiver uma pagina no parametro, ele preenche o caminho com a pasta layout
+        //+ a pasta que no padrao criado tem o mesmo nome da pagina
+        //se for nulo, ele quer usar o caminho default contendo só layout
+        return (pageParam==null || pageParam.equals("") || pageParam.equals("home")) ? "layout/" : "layout/"+pageParam+"/" ;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
