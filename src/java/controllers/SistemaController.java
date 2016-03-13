@@ -59,10 +59,10 @@ public class SistemaController extends HttpServlet {
         } 
 
         //Cria o dispatcher, pega o dispatcher e faz o forward
-        RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/home");
 
         //Carrega os parametros no forward para saber lá na frente como funciona
-        request.setAttribute("titulo", titulo);
+        request.setAttribute("titulo", "Teste de login com sucesso");
         request.setAttribute("page", pagina);
 
         rd.forward(request, response);

@@ -55,7 +55,6 @@ public class CadastroController extends HttpServlet {
             if(validaCamposCadastro(request, errors)){
                //Retorna ao cadastro
                RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
-               request.setAttribute("page", "cadastro");
                request.setAttribute("errors", errors);
                rd.forward(request, response); 
             } else {
@@ -67,6 +66,7 @@ public class CadastroController extends HttpServlet {
 
                //Retorna para o login(não passou parametro então é login)
                RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+               request.setAttribute("page", null);
                rd.forward(request, response);   
             }
         } catch (Exception ex) {
@@ -132,7 +132,6 @@ public class CadastroController extends HttpServlet {
                 errors.add("O telefone precisa ter no mínimo 8 caracteres");
             }
             
-           String sexo = pessoa.getSexo();
             if((pessoa.getSexo()==null) || (pessoa.getSexo().equals("") && !pessoa.getSexo().equals("M") && !pessoa.getSexo().equals("F"))){
                 temErro = true;
                 errors.add("O valor do sexo é inválido");
