@@ -2,11 +2,8 @@
 <!DOCTYPE html>
 <html>
     <%                 
-        //Pega o parametro pagina para saber qual página redirecionar
-        String pagina = request.getParameter("page");
-        
         //Se não tiver nada, quer dizer que ele quer a página inicial, se tiver, ele coloca o nome
-        pagina = (pagina != null) ? pagina : "home" ;
+        String pagina = (request.getParameter("page") != null) ? (request.getParameter("page")) : "home" ;
         
         //Se tiver uma pagina no parametro, ele preenche o caminho com a pasta layout
         //+ a pasta que no padrao criado tem o mesmo nome da pagina

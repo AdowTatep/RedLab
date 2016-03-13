@@ -7,7 +7,6 @@
                     <div class="content-center msgs">
                         <div class="topMsg">
                             <span class="wlcMessage">Cadastro de usuário</span>
-                            <h1><%= titulo %></h1>
                         </div>
                         <%
                             //Ainda não funcional, não é possivel pegar esse array de erros ainda

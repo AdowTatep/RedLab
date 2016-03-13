@@ -132,7 +132,8 @@ public class CadastroController extends HttpServlet {
                 errors.add("O telefone precisa ter no mínimo 8 caracteres");
             }
             
-            if(pessoa.getSexo()==null || pessoa.getSexo().equals("") || !pessoa.getSexo().equals("M") || !pessoa.getSexo().equals("F")){
+           String sexo = pessoa.getSexo();
+            if((pessoa.getSexo()==null) || (pessoa.getSexo().equals("") && !pessoa.getSexo().equals("M") && !pessoa.getSexo().equals("F"))){
                 temErro = true;
                 errors.add("O valor do sexo é inválido");
             }
