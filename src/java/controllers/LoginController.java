@@ -22,8 +22,8 @@ import model.dao.UsuarioJpaController;
  *
  * @author adowt
  */
-@WebServlet(name = "SistemaController", urlPatterns = {"/sistema"})
-public class SistemaController extends HttpServlet {
+@WebServlet(name = "SistemaController", urlPatterns = {"/login"})
+public class LoginController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +37,15 @@ public class SistemaController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+         //Se não achar o usuário, quer voltar para a home então já seta
+         //Pois se achar usuario, este atributo será alterado
+        String pagina = "home";
 
-        //Pega os parametros passados para fazer MVC
-        String titulo = (String) request.getAttribute("titulo");
-        String pagina = null;
-
-        //Se pagina for login ele pega o campo digitado no formulário de usuario e preenche
+        //Pega o login preenchido
         Usuario usuario = new Usuario(request);
 
-        //Cria uma conexao e tenta achar o usuario digitado na tabela
+        //Cria uma conexao e tenta achar se o usuario digitado existe
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
         Usuario usuarioEncontrado = new UsuarioJpaController(emf).findUsuario(usuario.getLogin());
 
@@ -54,15 +54,14 @@ public class SistemaController extends HttpServlet {
         if (usuarioEncontrado != null
                 && (usuarioEncontrado.getSenha().equals(usuario.getSenha()))
                 && (usuarioEncontrado.getLogin().equals(usuario.getLogin()))) {
-            //Então redireciona para dentro do sistema
+            //Então redireciona para dentro do sistema de acordo com seu tipo
             pagina = (usuarioEncontrado.getIsAdmin()) ? "admin" : "usuario" ;
         } 
 
         //Cria o dispatcher, pega o dispatcher e faz o forward
-        RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
-
+        RequestDispatcher rd = request.getRequestDispatcher("/home");
+        
         //Carrega os parametros no forward para saber lá na frente como funciona
-        request.setAttribute("titulo", titulo);
         request.setAttribute("page", pagina);
 
         rd.forward(request, response);

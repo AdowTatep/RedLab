@@ -1,3 +1,5 @@
+<%@page import="controllers.Mensagem"%>
+<%@page import="java.util.ArrayList"%>
 <section class="row">
     <div class="cadastroForm col s12 m5 content-center ">
         <div class="card">            
@@ -8,14 +10,14 @@
                         <div class="topMsg">
                             <span class="wlcMessage">Cadastro de usuário</span>
                         </div>
-                        <%
-                            //Ainda não funcional, não é possivel pegar esse array de erros ainda
-                            if(request.getParameter("errors")!=null ){
-                             %>                             
-                             <div class="errorMsg">
-                                <span>Houve um erro: <%= request.getParameter("errors") %></span>
-                             </div>
-                             <%
+                        <%                            
+                            ArrayList<Mensagem> msgs = (ArrayList<Mensagem>)request.getAttribute("msgs");     
+                            for (Mensagem msg : msgs) {
+                                if(msg.getTipo().equals("erro")){
+                                    %>
+                                    <span class="errorMsg"><%= msg.getMensagem() %></span><br>
+                                    <%
+                                }
                             }
                         %>
                     </div>

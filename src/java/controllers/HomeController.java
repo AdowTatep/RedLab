@@ -6,6 +6,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,43 +30,41 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        //Cria a lista de mensagens
+        ArrayList<Mensagem> mensagens = ((ArrayList<Mensagem>)request.getAttribute("erros")==null) ? new ArrayList<>() : (ArrayList<Mensagem>)request.getAttribute("msgs") ;
+        
         RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
         
-        //Pega qual página quer ser acessada, e o caminho customizado
-        String pagina = geraPagina((String)request.getAttribute("page"));
-        String caminho = geraCaminho(pagina);
+        //Pega qual página quer ser acessada, e gera o caminho customizado
+        Helpers help = new Helpers();
+        
+        //Testa se a página veio como atributo, se sim, NÃO é o primeiro load
+        //Então preenche com a página passada como atributo. Do contrário
+        String pagina = help.geraPagina(((String)request.getAttribute("page") == null)? request.getParameter("page") : (String)request.getAttribute("page"));
+        String caminho = help.geraCaminho(pagina);
         
         //Pega o titulo passado
         //Se não passou nada é nulo
         //Se é nulo usa um padrão
-        String titulo = (String)request.getAttribute("titulo");
-        titulo =  (titulo != null) ?  (String)request.getAttribute("titulo") : "RedLab Laboratório" ;        
+        String titulo = request.getParameter("titulo");
+        titulo =  (titulo != null) ?  request.getParameter("titulo") : "RedLab Laboratório" ;        
         
-        if (pagina != null && pagina.equals("login"))
-            rd=request.getRequestDispatcher("/sistema");
+        //Verifica se quer fazer o login
+        //Se o login não for realizado, pagina é home então retorna a inicial
+        //Se for realizado pagina é admin ou usario
+        if (pagina.equals("login"))
+            rd=request.getRequestDispatcher("/login");
             
         //Coloca o título padrão
         request.setAttribute("titulo", titulo);
         request.setAttribute("page", pagina);
         request.setAttribute("path", caminho);
+        request.setAttribute("msgs", mensagens);
                 
         //No final, redireciona
         rd.forward(request, response);        
     }
     
-    private String geraPagina(String pageParam){
-        //Se não tiver nada, quer dizer que ele quer a página inicial, se tiver, ele coloca o nome da página
-        //Para buscar no caminho e então carregar esta página diferente
-        return (pageParam==null || pageParam.equals("")) ? "home" : pageParam ;
-    }
-    
-    private String geraCaminho(String pageParam){
-        //Se tiver uma pagina no parametro, ele preenche o caminho com a pasta layout
-        //+ a pasta que no padrao criado tem o mesmo nome da pagina
-        //se for nulo, ele quer usar o caminho default contendo só layout
-        return (pageParam==null || pageParam.equals("") || pageParam.equals("home")) ? "layout/" : "layout/"+pageParam+"/" ;
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -82,11 +82,11 @@ public class Pessoa implements Serializable {
     private void populatePessoaUsingParameters(HttpServletRequest request, Usuario usuario) {        
         this.setLogin(usuario.getLogin());
         this.setUsuario(usuario);
-        this.setNome(((String)request.getAttribute("nome") == null) ? "" : (String)request.getAttribute("nome"));
-        this.setTelefone(((String)request.getAttribute("telefone")==null) ? "" : (String)request.getAttribute("telefone") );
-        this.setSexo(((String)request.getAttribute("sexo")==null) ? "" : (String)request.getAttribute("sexo"));
-        this.setCpf(((String)request.getAttribute("cpf")==null) ? "": (String)request.getAttribute("cpf"));
-        this.setEndereco(((String)request.getAttribute("endereco")==null) ? "": (String)request.getAttribute("endereco"));
+        this.setNome((request.getParameter("nome") == null) ? "" : request.getParameter("nome"));
+        this.setTelefone((request.getParameter("telefone")==null) ? "" : request.getParameter("telefone") );
+        this.setSexo((request.getParameter("sexo")==null) ? "" : request.getParameter("sexo"));
+        this.setCpf((request.getParameter("cpf")==null) ? "": request.getParameter("cpf"));
+        this.setEndereco((request.getParameter("endereco")==null) ? "": request.getParameter("endereco"));
     }
     
     public String getLogin() {
