@@ -5,10 +5,8 @@
  */
 package controllers.commands;
 
-import controllers.CadastroController;
 import controllers.Mensagem;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,7 +66,7 @@ public class CallCadastroCommand extends HttpServlet {
             //Se deu erro no banco, então
             Mensagem msg = new Mensagem("erro", "geral", "Houve algum erro ao tentar conectar ao banco");
             if (!mensagens.contains(msg)) mensagens.add(msg);
-            Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(controllers.commands.CallCadastroCommand.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             //No final de tudo
             //Faz o forward de acordo e passa as mensagens de erro
@@ -164,8 +162,11 @@ public class CallCadastroCommand extends HttpServlet {
             }
             
             return temErro;
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
+        }  catch (Exception ex){
+            Mensagem msg = new Mensagem("erro", "geral", ex.getMessage());
+            if (!mensagens.contains(msg)) mensagens.add(msg);
+            Logger.getLogger(controllers.commands.CallCadastroCommand.class.getName()).log(Level.SEVERE, null, ex);
+            //Se der problema, retorna que deu erro
             return true;
         }
     }

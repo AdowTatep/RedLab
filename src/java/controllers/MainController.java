@@ -5,6 +5,8 @@
  */
 package controllers;
 
+import controllers.commands.CallLoginActionCommand;
+import controllers.commands.CallPageAdminCommand;
 import controllers.commands.CallPageBasedOnAttributeCommand;
 import controllers.commands.CommandApp;
 import java.io.IOException;
@@ -29,6 +31,8 @@ public class MainController extends HttpServlet {
     static {
         comandos.put("home", new CallPageBasedOnAttributeCommand());
         comandos.put("cadastro", new CallPageBasedOnAttributeCommand());
+        comandos.put("login", new CallLoginActionCommand());
+        comandos.put("admin", new CallPageAdminCommand());
     }
     
     /**

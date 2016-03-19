@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import model.Usuario;
 import model.dao.exceptions.IllegalOrphanException;
 import model.dao.exceptions.NonexistentEntityException;
@@ -192,6 +194,22 @@ public class UsuarioJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
+        }
+    }
+
+    public Usuario findUsuarioByLoginAndSenha(String login, String senha) {
+        String jpql = "select u from Usuario u where u.login = :log and u.senha = :sen ";
+        
+        Query q = getEntityManager().createQuery(jpql);
+        q.setParameter("log", login);
+        q.setParameter("sen", senha);
+        
+        try {
+            return (Usuario) q.getSingleResult();
+        } catch (NonUniqueResultException ex) {
+            return null;
+        } catch (NoResultException ex) {
+            return null;
         }
     }
     
