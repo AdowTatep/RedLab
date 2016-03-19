@@ -136,8 +136,10 @@ $("#cadastrarFormulario").onsubmit(function (e) {
                 sexo = "M";
             }
 
-    if(!validaFormCampos(login, senha, nome, telefone, sexo, cpf, endereco, page, url));
+    if(!validaFormCampos(login, senha, nome, telefone, sexo, cpf, endereco, page, url)){
         $form.submit();
+        Materialize.toast('Cadastrando informações...', 5000);
+    }
 });
 
 $("#cadastrarFormulario").keypress(function (e) {

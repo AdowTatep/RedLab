@@ -41,11 +41,12 @@ public class CadastroController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+            response.setContentType("text/html;charset=UTF-8"); 
+        
         ArrayList<Mensagem> mensagens = (ArrayList<Mensagem>)request.getAttribute("erros");
         RequestDispatcher rd = request.getRequestDispatcher("/home");
         
         try {
-            response.setContentType("text/html;charset=UTF-8"); 
             
             //Preenche o usuario
             Usuario usuario = new Usuario(request);
