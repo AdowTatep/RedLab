@@ -3,14 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controllers.commands;
 
-import controllers.commands.CallPageBasedOnAttributeCommand;
-import controllers.commands.CommandApp;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,16 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adowt
  */
-@WebServlet(name = "MainController", urlPatterns = {"/control"})
-public class MainController extends HttpServlet {
+@WebServlet(name = "CallCadastroCommand", urlPatterns = {"/cadastrar"})
+public class CallCadastroCommand extends HttpServlet {
 
-    public static final Map<String, CommandApp> comandos = new HashMap<>();
-    
-    static {
-        comandos.put("home", new CallPageBasedOnAttributeCommand());
-        comandos.put("cadastro", new CallPageBasedOnAttributeCommand());
-    }
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,41 +31,12 @@ public class MainController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
-        //Pega a página
-        String pagina = new Helpers().geraPagina((request.getAttribute("page")==null) ? request.getParameter("page") : (String)request.getAttribute("page")) ;        
-        
-        String titulo = (request.getAttribute("title") == null)? "Red Lab Laboratórios" : (String)request.getAttribute("title");
-        
-        request.setAttribute("title", titulo);
-        request.setAttribute("page", pagina);
-        
-        try {
-            //Tenta se tem o comando
-            
-            //Se a página for nulo chama a padrão
-            if (pagina == null) {
-                //Seta o dispatcher
-                RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
-                //No final, redireciona
-                rd.forward(request, response);  
-            } else {
-                //Senão for nula chama o comando correspondente
-                comandos.get(pagina).execute(request, response);
-            }
-        } catch (Exception ex) {
-                //Seta o dispatcher
-                RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
-                request.setAttribute("path", "layout/");
-                request.setAttribute("page", "error");
-                request.setAttribute("msg", ex.getMessage());
-                //No final, redireciona
-                rd.forward(request, response);  
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("fine");
         }
-        
     }
-        
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

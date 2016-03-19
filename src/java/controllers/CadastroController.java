@@ -94,17 +94,20 @@ public class CadastroController extends HttpServlet {
                 temErro = true;
                 Mensagem msg = new Mensagem("erro", "login", "O campo de usuário só pode ter até 20 caracteres");
                 if (!mensagens.contains(msg)) mensagens.add(msg);
+            } else if (usuario.getLogin().length()<5) {
+                temErro = true;
+                Mensagem msg = new Mensagem("erro", "login", "Login precisa ter pelo menos 5 caracteres");
+                if (!mensagens.contains(msg)) mensagens.add(msg);
             }
             
             if(usuario.getSenha().equals("") || usuario.getSenha()==null){
                 temErro = true;
                 Mensagem msg = new Mensagem("erro", "senha", "A senha não pode estar vazia");
                 if (!mensagens.contains(msg)) mensagens.add(msg);
-            }
-            
+            }            
             //Eu testo se é maior que 50 mesmo sendo limitado no html
             //Pois a pessoa pode ir no html e alterar o valor
-            if(usuario.getSenha().length()>50) {
+            else if(usuario.getSenha().length()>50) {
                 temErro = true;
                 Mensagem msg = new Mensagem("erro", "senha", "A senha não pode ter mais que 50 caracteres");
                 if (!mensagens.contains(msg)) mensagens.add(msg);
@@ -150,7 +153,7 @@ public class CadastroController extends HttpServlet {
                 if (!mensagens.contains(msg)) mensagens.add(msg);
             } else if(pessoa.getCpf().length() != 11){
                 temErro = true;
-                Mensagem msg = new Mensagem("erro", "cpf", "O campo cpf precisa de 11 caracteres");
+                Mensagem msg = new Mensagem("erro", "cpf", "O campo CPF precisa de 11 caracteres");
                 if (!mensagens.contains(msg)) mensagens.add(msg);
             }
             

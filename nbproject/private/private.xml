@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/src/java/controllers/HomeController.java</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/web/layout/error.jsp</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/src/java/controllers/Helpers.java</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/web/layout/cadastro/cadastro.jsp</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/src/java/controllers/MainController.java</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/src/java/controllers/CadastroController.java</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/src/java/controllers/commands/CallPageBasedOnAttributeCommand.java</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/web/_layout.jsp</file>
+            <file>file:/C:/Users/adowt/Documents/GitHub/RedLab/web/layout/home.jsp</file>
         </group>
     </open-files>
 </project-private>
