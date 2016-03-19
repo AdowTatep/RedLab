@@ -17,14 +17,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
-   
+/**
+ *
+ * @author adowt
+ */
+@WebServlet(name = "MainController", urlPatterns = {"/control"})
+public class MainController extends HttpServlet {
+
     public static final Map<String, CommandApp> comandos = new HashMap<>();
     
     static {
         comandos.put("cadastro", new CallCadastroCommand());
-        comandos.put("login", new CallLoginCommand());
+        comandos.put("login", new CallCadastroCommand());
     }
     
     /**
@@ -39,19 +43,33 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         //Pega a página
-        String pagina = (request.getAttribute("page")==null) ? request.getParameter("page") : (String)request.getAttribute("page") ;
-        
-        //Seta o dispatcher
-        RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+        String pagina = (request.getAttribute("page")==null) ? request.getParameter("page") : (String)request.getAttribute("page") ;        
         
         request.setAttribute("page", pagina);
         
-        //No final, redireciona
-        rd.forward(request, response);        
+        try {
+            //Tenta se tem o comando
+            
+            //Se a página for nulo chama a padrão
+            if (pagina == null) {
+                //Seta o dispatcher
+                RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+                //No final, redireciona
+                rd.forward(request, response);  
+            } else {
+                //Senão for nula chama o comando correspondente
+                comandos.get(pagina).execute(request, response);
+            }
+        } catch (Exception ex) {
+                //Seta o dispatcher
+                RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+                //No final, redireciona
+                rd.forward(request, response);  
+        }
     }
-    
+        
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
