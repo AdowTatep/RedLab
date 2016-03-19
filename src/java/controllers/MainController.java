@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import controllers.commands.CallCadastroCommand;
+import controllers.commands.CallPageBasedOnAttributeCommand;
 import controllers.commands.CommandApp;
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,8 +27,8 @@ public class MainController extends HttpServlet {
     public static final Map<String, CommandApp> comandos = new HashMap<>();
     
     static {
-        comandos.put("cadastro", new CallCadastroCommand());
-        comandos.put("login", new CallCadastroCommand());
+        comandos.put("home", new CallPageBasedOnAttributeCommand());
+        comandos.put("cadastro", new CallPageBasedOnAttributeCommand());
     }
     
     /**
@@ -42,10 +42,15 @@ public class MainController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         //Pega a página
-        String pagina = (request.getAttribute("page")==null) ? request.getParameter("page") : (String)request.getAttribute("page") ;        
+        String pagina = new Helpers().geraPagina((request.getAttribute("page")==null) ? request.getParameter("page") : (String)request.getAttribute("page")) ;        
         
+        String titulo = (request.getAttribute("title") == null)? "Red Lab Laboratórios" : (String)request.getAttribute("title");
+        
+        
+        request.setAttribute("title", titulo);
         request.setAttribute("page", pagina);
         
         try {
@@ -64,9 +69,13 @@ public class MainController extends HttpServlet {
         } catch (Exception ex) {
                 //Seta o dispatcher
                 RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
+                request.setAttribute("path", "layout/");
+                request.setAttribute("page", "error");
+                request.setAttribute("msg", ex.getMessage());
                 //No final, redireciona
                 rd.forward(request, response);  
         }
+        
     }
         
 

@@ -7,7 +7,6 @@ package controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
@@ -41,8 +40,10 @@ public class CadastroController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         ArrayList<Mensagem> mensagens = (ArrayList<Mensagem>)request.getAttribute("erros");
         RequestDispatcher rd = request.getRequestDispatcher("/home");
+        
         try {
             response.setContentType("text/html;charset=UTF-8"); 
             

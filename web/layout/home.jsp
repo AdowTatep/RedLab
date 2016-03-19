@@ -1,7 +1,7 @@
 <section class="row">
     <div class="loginForm col s12 m5 content-center ">
         <div class="card">            
-            <form method="POST" action="home" class="">
+            <form method="POST" action="control" class="">
                 <div class="card-content">
 
                     <div class="content-center msgs">
