@@ -27,7 +27,7 @@ public class CallPageAdminCommand implements CommandApp {
         RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
         
         //Pega o usuario para trabalhar
-        Usuario usuario = (Usuario)request.getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
         
         //Pega qual página quer ser acessada, e gera o caminho customizado
         Helpers help = new Helpers();
@@ -43,7 +43,6 @@ public class CallPageAdminCommand implements CommandApp {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
         List<Exame> exames = new ExameJpaController(emf).findExameEntities();        
         
-        request.setAttribute("usuario", usuario);
         request.setAttribute("page", pagina);
         request.setAttribute("titulo", titulo);
         request.setAttribute("path", caminho);

@@ -6,6 +6,7 @@
 package controllers;
 
 import controllers.commands.CallLoginActionCommand;
+import controllers.commands.CallLogoutActionCommand;
 import controllers.commands.CallPageAdminCommand;
 import controllers.commands.CallPageBasedOnAttributeCommand;
 import controllers.commands.CommandApp;
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Usuario;
 
 /**
  *
@@ -33,6 +35,7 @@ public class MainController extends HttpServlet {
         comandos.put("cadastro", new CallPageBasedOnAttributeCommand());
         comandos.put("login", new CallLoginActionCommand());
         comandos.put("admin", new CallPageAdminCommand());
+        comandos.put("logout", new CallLogoutActionCommand());
     }
     
     /**
@@ -49,7 +52,13 @@ public class MainController extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         //Pega a página
-        String pagina = new Helpers().geraPagina((request.getAttribute("page")==null) ? request.getParameter("page") : (String)request.getAttribute("page")) ;        
+        String pagina = new Helpers().geraPagina((request.getAttribute("page")==null) ? request.getParameter("page") : (String)request.getAttribute("page"));   
+        
+        //Verifica se já existe um usuário logado
+        Usuario user = (Usuario)request.getSession().getAttribute("usuario");
+        if(user!=null && !pagina.equals("logout")){
+            pagina = (user.getIsAdmin()) ? "admin"  : "user" ;
+        }
         
         String titulo = (request.getAttribute("title") == null)? "Red Lab Laboratórios" : (String)request.getAttribute("title");
         

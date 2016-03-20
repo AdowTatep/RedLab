@@ -35,7 +35,7 @@ public class CallLoginActionCommand implements CommandApp {
             usuario.setPessoa(new PessoaJpaController(emf).findPessoa(usuario.getLogin()));
             
             //Passa o usuário como atributo
-            request.setAttribute("usuario", usuario);            
+            request.getSession().setAttribute("usuario", usuario);
             
             //Então redireciona para dentro do sistema de acordo com seu tipo
             pagina = (usuarioEncontrado.getIsAdmin()) ? "admin" : "usuario" ;

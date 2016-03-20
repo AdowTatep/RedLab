@@ -33,6 +33,9 @@
     float: none !important;
 }
 
+nav i {
+    margin-top: 3%;
+}
 
 .msgs .topMsg {
     text-align: center;

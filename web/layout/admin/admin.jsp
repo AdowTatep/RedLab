@@ -1,36 +1,18 @@
-<%@page import="java.util.List"%>
-<%@page import="model.Exame"%>
-<section class="container row">
-    <div class="col s12 m7">
-        <%
-            List<Exame> exames = (List<Exame>)request.getAttribute("exames");
-            %>
-        <table class="highlight bordered">
-            <thead>
-                <tr>
-                    <th data-field="id">ID</th>
-                    <th data-field="cliente">Cliente</th>
-                    <th data-field="descricao">Descrição</th>
-                    <th data-field="isEntregue">Entregue</th>
-                    <th data-field="custo">Custo</th>
-                </tr>
-            </thead>
+<%@page import="model.Usuario"%>
+<%
+    
+    Usuario user = (Usuario)request.getSession().getAttribute("usuario");
 
-            <tbody>
-                <%
-                    for (Exame exame : exames) {
-                        %>
-                        <tr>
-                            <td><%= exame.getId() %></td>
-                            <td><%= exame.getLoginPessoa().getNome() %></td>
-                            <td><%= exame.getDescricao() %></td>
-                            <td><%= (exame.getIsEntregue()) ? "<i class='material-icons checkGreen'>check_circle</i>" : "<i class='material-icons cancelRed'>cancel</i>" %></td>
-                            <td>R$<%= exame.getCusto() %></td>
-                        </tr>
-                        <%                            
-                    }
-                %>
-            </tbody>
-        </table>
-    </div>
+    %>
+
+<section class="container row">
+    <section class="welcomeUser">
+        <h4>Bem vindo, <%= user.getPessoa().getNome() %>.</h4>
+        <p>Essas são as informações mais recentes do sistema. Clique no <strong>botão inferior esquerdo para uma nova ação</strong>, ou altere as pesquisas da tabela</p>
+    </section>
+    <jsp:include page='<%= "tabelaTodosExames.jsp" %>' />
+    
+    
+    <jsp:include page='<%= "menuFuncoes.jsp" %>' />
+    
 </section>
