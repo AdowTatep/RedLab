@@ -115,19 +115,19 @@ function  validaFormCampos(login, senha, nome, telefone, sexo, cpf, endereco, ur
     
 }
 
-$("#cadastrarFormulario").onsubmit(function (e) {
-    e.preventDefault();
-
-    var $form = $(this),
+function onSubmit() {
+    var $form = $("#cadastrarFormulario"),
             login = $form.find('input[name="login"]').val(),
             senha = $form.find('input[name="senha"]').val(),
             nome = $form.find('input[name="nome"]').val(),
-            telefone = $form.find('input[name="nome"]').val(),
+            telefone = $form.find('input[name="telefone"]').val(),
             sexo = $('.select-dropdown').val(),
             cpf = $form.find('input[name="cpf"]').val(),
             endereco = $form.find('input[name="endereco"]').val(),
-            page = $form.find('input[name="page"]').val(),
+            page = $form.find('button[name="page"]').val(),
             url = $form.attr('action');
+            
+            console.log(page);
             
             //Cuida do sexo, o framework não deixa no HTML as informações "F" e "M"
             if (sexo == "Feminino") {
@@ -137,19 +137,26 @@ $("#cadastrarFormulario").onsubmit(function (e) {
             }
 
     if(!validaFormCampos(login, senha, nome, telefone, sexo, cpf, endereco, page, url)){
-        $form.submit();
+        console.log("eoq");
         Materialize.toast('Cadastrando informações...', 5000);
+        $form.submit();
+//        $('.modal-trigger').leanModal();
+//        $("#modalConcluido").openModal();
     }
+}
+
+$("#cadastrarFormulario").submit(function (e) {
+    
 });
 
 $("#cadastrarFormulario").keypress(function (e) {
     if (e.keyCode == 13) {
         e.preventDefault();
-        $(this).onsubmit();
+        onSubmit();
     }
 });
 $("#btn-cadastrar").click(function (e) {
     e.preventDefault();
-    $("#cadastrarFormulario").onsubmit();
+    onSubmit();
 });
 

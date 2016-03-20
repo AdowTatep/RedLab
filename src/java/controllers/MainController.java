@@ -5,12 +5,14 @@
  */
 package controllers;
 
+import controllers.commands.CallCadastroCommand;
 import controllers.commands.CallLoginActionCommand;
 import controllers.commands.CallLogoutActionCommand;
 import controllers.commands.CallPageAdminCommand;
 import controllers.commands.CallPageBasedOnAttributeCommand;
 import controllers.commands.CommandApp;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -36,6 +38,7 @@ public class MainController extends HttpServlet {
         comandos.put("login", new CallLoginActionCommand());
         comandos.put("admin", new CallPageAdminCommand());
         comandos.put("logout", new CallLogoutActionCommand());
+        comandos.put("addPessoa", new CallCadastroCommand());
     }
     
     /**
@@ -50,18 +53,22 @@ public class MainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        ArrayList<Mensagem> mensagens = (request.getAttribute("msgs")==null) ? new ArrayList<>() : (ArrayList<Mensagem>) request.getAttribute("msgs");
+        
         response.setContentType("text/html;charset=UTF-8");
+        
         //Pega a página
-        String pagina = new Helpers().geraPagina((request.getAttribute("page")==null) ? request.getParameter("page") : (String)request.getAttribute("page"));   
+        String pagina = new Helpers().geraPagina(((String)request.getAttribute("page")==null) ?  request.getParameter("page") : (String)request.getAttribute("page") );   
         
         //Verifica se já existe um usuário logado
         Usuario user = (Usuario)request.getSession().getAttribute("usuario");
-        if(user!=null && !pagina.equals("logout")){
+        if(user!=null && !pagina.equals("logout") && !pagina.equals("addPessoa")){
             pagina = (user.getIsAdmin()) ? "admin"  : "user" ;
         }
         
         String titulo = (request.getAttribute("title") == null)? "Red Lab Laboratórios" : (String)request.getAttribute("title");
         
+        request.setAttribute("msgs", mensagens);
         request.setAttribute("title", titulo);
         request.setAttribute("page", pagina);
         
@@ -83,7 +90,11 @@ public class MainController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("_layout.jsp");
                 request.setAttribute("path", "layout/");
                 request.setAttribute("page", "error");
-                request.setAttribute("msg", ex.getMessage());
+                
+                Mensagem msg = new Mensagem("erro", "geral", "Houve algum erro ao tentar encontrar a página<br>"+ex.getMessage());
+                if (!mensagens.contains(msg)) mensagens.add(msg);
+                request.setAttribute("msgs", mensagens);
+                
                 //No final, redireciona
                 rd.forward(request, response);  
         }

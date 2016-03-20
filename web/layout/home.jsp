@@ -1,7 +1,7 @@
 <section class="row">
     <div class="loginForm col s12 m5 content-center ">
         <div class="card">            
-            <form method="POST" action="control" class="">
+            <form method="POST" action="control" class="" id="loginForm">
                 <div class="card-content">
 
                     <div class="content-center msgs">
@@ -12,25 +12,25 @@
 
 
 
-                        <div class="row">
-                            <div class="input-field col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
 
-                                <input  id="loginCampo" type="text" class="validate" name="login" maxlength="20">
+                            <input  id="loginCampo" type="text" class="validate" name="login" maxlength="20">
 
-                                <label for="loginCampo">Login</label>
+                            <label for="loginCampo">Login</label>
 
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="input-field col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
 
-                                <input  id="senhaCampo" type="password" class="validate" name="senha" maxlength="50">
+                            <input  id="senhaCampo" type="password" class="validate" name="senha" maxlength="50">
 
-                                <label for="senhaCampo">Senha</label>
+                            <label for="senhaCampo">Senha</label>
 
-                            </div>
                         </div>
+                    </div>
 
 
                 </div>
@@ -43,12 +43,20 @@
                     </button>
 
 
-                    <button class="btn waves-effect red darken-4" type="submit" name="page" value="login">
+                    <button id="loginBtn" class="btn waves-effect red darken-4" type="submit" name="page" value="login">
                         Fazer Login
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
             </form>
+            <script>
+                $("#loginForm").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#loginBtn").click();
+                    }
+                });
+            </script>
         </div>
     </div>
 </section>

@@ -197,7 +197,7 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public Usuario findUsuarioByLoginAndSenha(String login, String senha) {
+    public Usuario findUsuarioByLoginAndSenha(String login, String senha) throws NonUniqueResultException, NoResultException {
         String jpql = "select u from Usuario u where u.login = :log and u.senha = :sen ";
         
         Query q = getEntityManager().createQuery(jpql);
@@ -207,9 +207,9 @@ public class UsuarioJpaController implements Serializable {
         try {
             return (Usuario) q.getSingleResult();
         } catch (NonUniqueResultException ex) {
-            return null;
+            throw ex;
         } catch (NoResultException ex) {
-            return null;
+            throw ex;
         }
     }
     
