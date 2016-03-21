@@ -1,4 +1,5 @@
-<jsp:include page='<%= "cadastroPessoa.jsp" %>' />      
+<jsp:include page='<%= "cadastroPessoa.jsp" %>' />
+
 
 <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large red darken-4" >
