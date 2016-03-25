@@ -18,8 +18,7 @@
 
                         </div>                        
 
-                        <%                                          
-                            if (mensagens != null) {
+                        <%                            if (mensagens != null) {
                         %>
                         <div class="errorsMsg"
                              <%
@@ -42,7 +41,7 @@
 
                         <div class="input-field col s12 m6">
                             <div>
-                                <%                                          
+                                <%
                                     if (mensagens != null) {
                                         for (Mensagem msg : mensagens) {
                                             if (msg.getContexto().equals("login")) {
@@ -208,10 +207,9 @@
                         <i class="material-icons right">person_add</i>
                     </button>
                     <input type="hidden" name="page" value="voltar" />
-                    <a href="/RedLab">
-                        <button class="btn waves-effect red darken-4" type="button" id="btn-voltar" />
-                        Voltar
-                        </button>
+                    <a href="href="/RedLab"" class="btn waves-effect red darken-4" type="button" id="btn-voltar" />
+                       Voltar
+                       <i class="material-icons right">undo</i>
                     </a>
                 </div>
             </form>
