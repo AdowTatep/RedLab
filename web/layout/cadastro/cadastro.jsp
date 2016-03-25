@@ -206,10 +206,10 @@
                         Confirmar Cadastro
                         <i class="material-icons right">person_add</i>
                     </button>
-                    <input type="hidden" name="page" value="voltar" />
-                    <a href="href="/RedLab"" class="btn waves-effect red darken-4" type="button" id="btn-voltar" />
-                       Voltar
-                       <i class="material-icons right">undo</i>
+
+                    <a href="/RedLab" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
+                    Voltar
+                    <i class="material-icons right">undo</i>
                     </a>
                 </div>
             </form>

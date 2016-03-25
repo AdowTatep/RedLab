@@ -1,12 +1,23 @@
 <section class="container row">
-    <section class="welcomeUser">
-        <h4>Esses são os resultados da sua busca:</h4>
-    </section>
-    
-    <jsp:include page='<%= "formBusca.jsp" %>' />
-    
-    <jsp:include page='<%= "usuarioTabela.jsp" %>' />
-    
+
+    <div class="row">
+        <section class="welcomeUser">
+            <h4>Faça uma busca:</h4>
+        </section>
+        <jsp:include page='<%= "formBusca.jsp"%>' />
+    </div>
+
+    <div class="divider"></div>
+
+    <div clas="row">
+
+        <section class="welcomeUser">
+            <h4>Resultados de pessoa:</h4>
+        </section>
+
+        <jsp:include page='<%= "usuarioTabela.jsp"%>' />
+    </div>
+
 </section>
 
 
