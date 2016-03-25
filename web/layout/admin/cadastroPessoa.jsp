@@ -87,7 +87,6 @@
                 </div>
             </div>
 
-
             <div id="modalConcluido" class="modal">
                 <div class="modal-content">
                     <h4 style="text-align:center">Aguarde...</h4>
@@ -97,9 +96,7 @@
                 </div>
             </div>
 
-
         </div>
-
 
         <div class="modal-footer">
             <button style="background-color: initial !important;" class="modal-action waves-effect btn-flat" type="submit" id="btn-cadastrar" name="page" value="addPessoa">

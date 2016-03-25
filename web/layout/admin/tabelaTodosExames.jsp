@@ -3,7 +3,7 @@
 <div class="col s12 m7">
         <%
             List<Exame> exames = (List<Exame>)request.getAttribute("exames");
-            %>
+        %>
         <table class="highlight bordered">
             <thead>
                 <div class="divider"></div>

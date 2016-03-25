@@ -3,7 +3,7 @@
     
     Usuario user = (Usuario)request.getSession().getAttribute("usuario");
 
-    %>
+%>
 
 <section class="container row">
     <section class="welcomeUser">
