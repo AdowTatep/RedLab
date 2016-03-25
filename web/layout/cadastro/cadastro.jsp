@@ -201,13 +201,18 @@
 
                 </div>
 
-
                 <div class="card-action">
                     <input type="hidden" name="page" value="addPessoa"></input>
                     <button class="btn waves-effect red darken-4" type="submit" id="btn-cadastrar" >
                         Confirmar Cadastro
                         <i class="material-icons right">person_add</i>
                     </button>
+                    <input type="hidden" name="page" value="voltar" />
+                    <a href="/RedLab">
+                        <button class="btn waves-effect red darken-4" type="button" id="btn-voltar" />
+                        Voltar
+                        </button>
+                    </a>
                 </div>
             </form>
             <script src="js/validaCadastro.js"></script>

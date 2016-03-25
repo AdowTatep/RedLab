@@ -98,7 +98,6 @@ public class MainController extends HttpServlet {
                 //No final, redireciona
                 rd.forward(request, response);  
         }
-        
     }
         
 
