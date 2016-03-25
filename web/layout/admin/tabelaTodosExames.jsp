@@ -7,7 +7,7 @@
         <table class="highlight bordered">
             <thead>
                 <div class="divider"></div>
-            <h5>Todos os exames mais recentes:</h5>
+            <h5>Exames mais recentes:</h5>
                 <tr>
                     <th data-field="id">ID</th>
                     <th data-field="cliente">Cliente</th>
