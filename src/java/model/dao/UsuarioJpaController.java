@@ -169,11 +169,20 @@ public class UsuarioJpaController implements Serializable {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
             }
-            return q.getResultList();
+
+            List<Usuario> usuarios = q.getResultList();
+
+            for (Usuario usu : usuarios) {
+                usu.setPessoa(new PessoaJpaController(emf).findPessoaFromUsuario(usu));
+            }
+
+            return usuarios;
         } finally {
             em.close();
         }
     }
+    
+    
 
     public Usuario findUsuario(String id) {
         EntityManager em = getEntityManager();
@@ -196,19 +205,53 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public Usuario findUsuarioByLoginAndSenha(String login, String senha) throws NonUniqueResultException, NoResultException {
         String jpql = "select u from Usuario u where u.login = :log and u.senha = :sen ";
-        
+
         Query q = getEntityManager().createQuery(jpql);
         q.setParameter("log", login);
         q.setParameter("sen", senha);
-        
+
         try {
             return (Usuario) q.getSingleResult();
         } catch (NonUniqueResultException | NoResultException ex) {
             throw ex;
         }
     }
-    
+        
+        public List<Usuario> findUsuariosByUsuario(Usuario usuario) {
+            List<Usuario> usuarios = new ArrayList<>();
+            String jpql;
+            
+            if(usuario.getLogin().equals("")) {
+                //Se usuario for nulo pega todo mundo
+                usuarios = findUsuarioEntities();
+            } else {
+                //Monta a busca de acordo com o usuario passado
+                //Se login for vazio retorna todo mundo de qualquer forma
+                //então podemos passar para a busca dentro de pessoa
+                jpql = "Select u from Usuario u where u.login = :log";
+                
+                //Prepara a query
+                Query q = getEntityManager().createQuery(jpql);
+                
+                q.setParameter("log", usuario.getLogin());
+                
+                try {
+                    //Preenche usuarios
+                    usuarios = q.getResultList();
+                    
+                    for(Usuario usu : usuarios) {
+                        //Para cada usuario vamos preencher a pessoa dentro dele
+                         usu.setPessoa(new PessoaJpaController(emf).findPessoaFromUsuario(usu));
+                    }
+                        
+                } catch (NonUniqueResultException | NoResultException ex) {
+                    throw ex;
+                }
+            } 
+            
+            return usuarios;
+        }
 }

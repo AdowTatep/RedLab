@@ -10,6 +10,7 @@ import controllers.commands.CallLoginActionCommand;
 import controllers.commands.CallLogoutActionCommand;
 import controllers.commands.CallPageAdminCommand;
 import controllers.commands.CallPageBasedOnAttributeCommand;
+import controllers.commands.CallSearchPessoaActionCommand;
 import controllers.commands.CommandApp;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class MainController extends HttpServlet {
         comandos.put("admin", new CallPageAdminCommand());
         comandos.put("logout", new CallLogoutActionCommand());
         comandos.put("addPessoa", new CallCadastroCommand());
+        comandos.put("searchPessoa", new CallSearchPessoaActionCommand());
     }
     
     /**
@@ -62,7 +64,7 @@ public class MainController extends HttpServlet {
         
         //Verifica se já existe um usuário logado
         Usuario user = (Usuario)request.getSession().getAttribute("usuario");
-        if(user!=null && !pagina.equals("logout") && !pagina.equals("addPessoa")){
+        if(user!=null && !pagina.equals("logout") && !pagina.equals("addPessoa") && !pagina.equals("searchPessoa") && !pagina.equals("searchExame") ){
             pagina = (user.getIsAdmin()) ? "admin"  : "user" ;
         }
         

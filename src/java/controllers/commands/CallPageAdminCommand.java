@@ -38,13 +38,13 @@ public class CallPageAdminCommand implements CommandApp {
         String caminho = help.geraCaminho(pagina);
                 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
+        
+        //Pega os exames
         List<Exame> exames = new ExameJpaController(emf).findExameEntities();        
+        
+        //Pega os usuarios(Para mostrar na lista de cadastro de exame)
         List<Usuario> usuarios = new UsuarioJpaController(emf).findUsuarioEntities();
-        
-        for(Usuario usu : usuarios){
-            usu.setPessoa(new PessoaJpaController(emf).findPessoaFromUsuario(usu));
-        }
-        
+                
         request.setAttribute("users", usuarios);
         request.setAttribute("page", pagina);
         request.setAttribute("path", caminho);
