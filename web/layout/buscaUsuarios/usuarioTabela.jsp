@@ -32,6 +32,22 @@
                                 <td><%= usu.getPessoa().getSexo() %></td>
                                 <td><%= usu.getPessoa().getEndereco() %></td>
                                 <td><%= (usu.getPessoa().getTemPlanoSaude()) ? "<i class='material-icons checkGreen'>check_circle</i>" : "<i class='material-icons cancelRed'>cancel</i>"%></td>
+                                <td>
+                                    <form method="post" action="control">
+                                        <input  id="loginCampo" type="hidden" name="login" maxlength="20" value="<%= usu.getLogin() %>">
+                                        <input  id="nomeCampo" type="hidden" name="nome" maxlength="150" value="<%= usu.getPessoa().getNome() %>">
+                                        <input  id="telefoneCampo" type="hidden" name="telefone" maxlength="20" value="<%= usu.getPessoa().getTelefone() %>">
+                                        <input  id="sexoCampo" type="hidden" name="sexo" maxlength="1" value="<%= usu.getPessoa().getSexo() %>">
+                                        <input  id="enderecoCampo" type="hidden" name="endereco"  value="<%= usu.getPessoa().getEndereco() %>">
+                                        
+                                        
+                                        <input  type="hidden" name="page"  value="deletarPessoa">
+                                        
+                                        <button class="btn-floating btn-flat waves-effect waves-circle red darken-4" type="submit" >
+                                            <i class="material-icons">delete_forever</i>
+                                        </button>
+                                    </form>                                        
+                                </td>
                             </tr>
                         <%
                         }

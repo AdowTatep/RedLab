@@ -6,6 +6,7 @@
 package controllers;
 
 import controllers.commands.CallCadastroCommand;
+import controllers.commands.CallDeletaPessoaActionCommand;
 import controllers.commands.CallLoginActionCommand;
 import controllers.commands.CallLogoutActionCommand;
 import controllers.commands.CallPageAdminCommand;
@@ -41,6 +42,7 @@ public class MainController extends HttpServlet {
         comandos.put("logout", new CallLogoutActionCommand());
         comandos.put("addPessoa", new CallCadastroCommand());
         comandos.put("searchPessoa", new CallSearchPessoaActionCommand());
+        comandos.put("deletarPessoa", new CallDeletaPessoaActionCommand());
     }
     
     /**
@@ -64,7 +66,12 @@ public class MainController extends HttpServlet {
         
         //Verifica se já existe um usuário logado
         Usuario user = (Usuario)request.getSession().getAttribute("usuario");
-        if(user!=null && !pagina.equals("logout") && !pagina.equals("addPessoa") && !pagina.equals("searchPessoa") && !pagina.equals("searchExame") ){
+        if(user!=null && !pagina.equals("logout") 
+                && !pagina.equals("addPessoa") 
+                && !pagina.equals("searchPessoa") 
+                && !pagina.equals("searchExame") 
+                && !pagina.equals("deletarPessoa") 
+                && !pagina.equals("deletarExame") ){
             pagina = (user.getIsAdmin()) ? "admin"  : "user" ;
         }
         

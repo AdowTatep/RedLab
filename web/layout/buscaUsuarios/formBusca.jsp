@@ -26,7 +26,7 @@
         Desfazer
         <i class="material-icons right">delete</i>
         </a>
-        <a href="/RedLab" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
+        <a href="/RedLab" class="btn waves-effect red darken-4" type="button" id="btn-voltar" />
         Voltar
         <i class="material-icons right">undo</i>
         </a>

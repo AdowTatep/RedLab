@@ -182,7 +182,17 @@ public class UsuarioJpaController implements Serializable {
         }
     }
     
-    
+    public void deletaUsuario(Usuario usuario){
+        EntityManager em = getEntityManager();
+        
+        Usuario usudel = em.merge(usuario);
+        
+        em.getTransaction().begin();
+        em.remove(usudel);
+        em.getTransaction().commit();
+        
+        em.close();
+    }
 
     public Usuario findUsuario(String id) {
         EntityManager em = getEntityManager();
