@@ -28,9 +28,9 @@ CREATE TABLE exame(
 	id int primary key auto_increment,
     custo double not null,
     descricao varchar(255),
-    tempoJejum time,
-    dataEntrega date,
-    horaEntrega time,
+    tempoJejum varchar(8),
+    dataEntrega varchar(10),
+    horaEntrega varchar(8),
     isEntregue bool,
     loginPessoa varchar(20),
 	CONSTRAINT fk_exame_pessoa FOREIGN KEY(loginPessoa) REFERENCES pessoa(login)

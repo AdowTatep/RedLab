@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.Exame;
 import model.Usuario;
 import model.dao.ExameJpaController;
+import model.dao.PessoaJpaController;
+import model.dao.UsuarioJpaController;
 
 /**
  *
@@ -34,17 +36,17 @@ public class CallPageAdminCommand implements CommandApp {
         
         String pagina = "admin";
         String caminho = help.geraCaminho(pagina);
-        
-        //Pega o titulo passado
-        //Se não passou nada é nulo
-        //Se é nulo usa um padrão
-        String titulo = "Admin - "+usuario.getLogin();
-        
+                
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
         List<Exame> exames = new ExameJpaController(emf).findExameEntities();        
+        List<Usuario> usuarios = new UsuarioJpaController(emf).findUsuarioEntities();
         
+        for(Usuario usu : usuarios){
+            usu.setPessoa(new PessoaJpaController(emf).findPessoaFromUsuario(usu));
+        }
+        
+        request.setAttribute("users", usuarios);
         request.setAttribute("page", pagina);
-        request.setAttribute("titulo", titulo);
         request.setAttribute("path", caminho);
         request.setAttribute("exames", exames);        
         

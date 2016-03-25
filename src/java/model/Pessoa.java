@@ -60,7 +60,7 @@ public class Pessoa implements Serializable {
     @OneToOne(optional = false)
     private Usuario usuario;
 
-    public Pessoa() {
+public Pessoa() {
         this.temPlanoSaude = false;
     }
     
@@ -88,7 +88,7 @@ public class Pessoa implements Serializable {
         this.setCpf((request.getParameter("cpf")==null) ? "": request.getParameter("cpf"));
         this.setEndereco((request.getParameter("endereco")==null) ? "": request.getParameter("endereco"));
     }
-    
+
     public String getLogin() {
         return login;
     }

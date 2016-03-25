@@ -50,6 +50,11 @@ public class Usuario implements Serializable {
         this.isAdmin = false;
         this.populateUsuarioUsingParameters(request);
     }
+    
+    public void populateUsuarioUsingParameters(HttpServletRequest request){       
+        this.setLogin((request.getParameter("login") == null) ? "" : request.getParameter("login"));
+        this.setSenha((request.getParameter("senha") == null) ? "" : request.getParameter("senha"));
+    }
 
     public Usuario(String login) {
         this.login = login;
@@ -58,11 +63,6 @@ public class Usuario implements Serializable {
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
-    }
-    
-    public void populateUsuarioUsingParameters(HttpServletRequest request){       
-        this.setLogin((request.getParameter("login") == null) ? "" : request.getParameter("login"));
-        this.setSenha((request.getParameter("senha") == null) ? "" : request.getParameter("senha"));
     }
 
     public String getLogin() {

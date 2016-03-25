@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import model.Pessoa;
 import model.dao.exceptions.IllegalOrphanException;
 import model.dao.exceptions.NonexistentEntityException;
@@ -249,5 +251,18 @@ public class PessoaJpaController implements Serializable {
             em.close();
         }
     }
+    
+     public Pessoa findPessoaFromUsuario(Usuario usuario) throws NonUniqueResultException, NoResultException {
+        String jpql = "select p from Pessoa p where p.login = :log";
+        
+        Query q = getEntityManager().createQuery(jpql);
+        q.setParameter("log", usuario.getLogin());
+        
+        try {
+            return (Pessoa) q.getSingleResult();
+        } catch (NonUniqueResultException | NoResultException ex) {
+            throw ex;
+        }
+     }
     
 }

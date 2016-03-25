@@ -18,7 +18,9 @@
             //reconhece o caminho tranquilo.
         %>        
         <script src="js/jquery-2.2.1.min.js"></script>
+        <script src="js/picker.js"></script>
         <script src="js/materialize.js"></script>
+        
         <link rel="stylesheet" href="css/materialize.css"/>
         <link rel="stylesheet" href="style.css"/>
         

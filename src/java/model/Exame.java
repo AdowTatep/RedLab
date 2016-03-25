@@ -6,7 +6,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -49,12 +46,12 @@ public class Exame implements Serializable {
     private double custo;
     @Column(length = 255)
     private String descricao;
-    @Temporal(TemporalType.TIME)
-    private Date tempoJejum;
-    @Temporal(TemporalType.DATE)
-    private Date dataEntrega;
-    @Temporal(TemporalType.TIME)
-    private Date horaEntrega;
+    @Column(length = 8)
+    private String tempoJejum;
+    @Column(length = 10)
+    private String dataEntrega;
+    @Column(length = 8)
+    private String horaEntrega;
     private Boolean isEntregue;
     @JoinColumn(name = "loginPessoa", referencedColumnName = "login")
     @ManyToOne
@@ -96,27 +93,27 @@ public class Exame implements Serializable {
         this.descricao = descricao;
     }
 
-    public Date getTempoJejum() {
+    public String getTempoJejum() {
         return tempoJejum;
     }
 
-    public void setTempoJejum(Date tempoJejum) {
+    public void setTempoJejum(String tempoJejum) {
         this.tempoJejum = tempoJejum;
     }
 
-    public Date getDataEntrega() {
+    public String getDataEntrega() {
         return dataEntrega;
     }
 
-    public void setDataEntrega(Date dataEntrega) {
+    public void setDataEntrega(String dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
 
-    public Date getHoraEntrega() {
+    public String getHoraEntrega() {
         return horaEntrega;
     }
 
-    public void setHoraEntrega(Date horaEntrega) {
+    public void setHoraEntrega(String horaEntrega) {
         this.horaEntrega = horaEntrega;
     }
 
