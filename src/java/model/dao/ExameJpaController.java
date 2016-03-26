@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import model.Exame;
 import model.Pessoa;
+import model.Usuario;
 import model.dao.exceptions.NonexistentEntityException;
 
 /**
@@ -154,6 +155,7 @@ public class ExameJpaController implements Serializable {
 
     public int getExameCount() {
         EntityManager em = getEntityManager();
+        
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Exame> rt = cq.from(Exame.class);
@@ -163,6 +165,15 @@ public class ExameJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public List<Exame> findExameByUsuario(Usuario user){
+        String jpql = "select e from Exame e where e.loginPessoa = :logPess";
+        
+        Query q = getEntityManager().createQuery(jpql);
+        q.setParameter("logPess", user.getPessoa());
+        
+        return (List<Exame>) q.getResultList();
     }
     
 }

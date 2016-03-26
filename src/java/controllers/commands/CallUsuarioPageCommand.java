@@ -38,7 +38,7 @@ public class CallUsuarioPageCommand implements CommandApp{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
         
         //Pega os exames
-        List<Exame> exames = new ExameJpaController(emf).findExameEntities(); 
+        List<Exame> exames = new ExameJpaController(emf).findExameByUsuario(usuario); 
         
         request.setAttribute("page", pagina);
         request.setAttribute("path", caminho);
