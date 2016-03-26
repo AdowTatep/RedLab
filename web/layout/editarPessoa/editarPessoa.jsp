@@ -14,11 +14,11 @@
                 <div class="card-content">
                     <div class="content-center msgs">
                         <div class="topMsg">
-                            <span class="wlcMessage">Cadastro de usuário</span>
+                            <span class="wlcMessage">Editar Cliente</span>
 
                         </div>                        
 
-                        <%                           
+                        <%
                             if (mensagens != null) {
                         %>
                         <div class="errorsMsg"
@@ -54,13 +54,23 @@
                                     }
                                 %>
                             </div>
-                                <input  id="loginCampo" type="text" class="validate" name="login" maxlength="20" value="<%= editarPessoa.getLogin() %>">
+                            <input  id="loginCampo" type="text" class="validate" name="login" maxlength="20" value="<%= editarPessoa.getLogin()%>">
 
                             <label id="loginLabel" for="loginCampo"><span class="cancelRed">*</span>Login</label>
 
                         </div>         
-                                
+
                         <div class="input-field col s12 m6">
+                            
+                            <input type="checkbox" id="adminCampo" name="isAdmin" />
+
+                        <label id="adminLabel" for="adminCampo">É admin?</label>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
                             <div>
                                 <%
                                     if (mensagens != null) {
@@ -96,7 +106,7 @@
                                     }
                                 %>
                             </div>
-                            <input  id="telefoneCampo" type="text" class="validate" name="telefone" maxlength="20" value="<%= editarPessoa.getPessoa().getTelefone() %>">
+                            <input  id="telefoneCampo" type="text" class="validate" name="telefone" maxlength="20" value="<%= editarPessoa.getPessoa().getTelefone()%>">
 
                             <label id="telefoneLabel" for="telefoneCampo"><span class="cancelRed">*</span>Telefone</label>
 
@@ -123,9 +133,9 @@
                                 %>
                             </div>
                             <select id="sexoCampo" name="sexo">
-                                <option value="" disabled <%= ( !editarPessoa.getPessoa().getSexo().equals("M") && !editarPessoa.getPessoa().getSexo().equals("F") ) ? "selected" : "" %> >Sexo</option>
-                                <option value="M" <%= (editarPessoa.getPessoa().getSexo().equals("M")) ? "selected" : "" %>>Masculino</option>
-                                <option value="F" <%= (editarPessoa.getPessoa().getSexo().equals("F")) ? "selected" : "" %>>Feminino</option>
+                                <option value="" disabled <%= (!editarPessoa.getPessoa().getSexo().equals("M") && !editarPessoa.getPessoa().getSexo().equals("F")) ? "selected" : ""%> >Sexo</option>
+                                <option value="M" <%= (editarPessoa.getPessoa().getSexo().equals("M")) ? "selected" : ""%>>Masculino</option>
+                                <option value="F" <%= (editarPessoa.getPessoa().getSexo().equals("F")) ? "selected" : ""%>>Feminino</option>
                             </select>
                             <label id="sexoLabel" for="sexoCampo"><span class="cancelRed">*</span>Escolha um sexo</label>
 
@@ -148,7 +158,7 @@
                                     }
                                 %>
                             </div>
-                            <input  id="cpfCampo" type="text" class="validate" name="cpf" maxlength="11" value="<%= editarPessoa.getPessoa().getCpf() %>">
+                            <input  id="cpfCampo" type="text" class="validate" name="cpf" maxlength="11" value="<%= editarPessoa.getPessoa().getCpf()%>">
 
                             <label id="cpfLabel" for="cpfCampo"><span class="cancelRed">*</span>CPF</label>
 
@@ -170,7 +180,7 @@
                                     }
                                 %>
                             </div>
-                            <input  id="enderecoCampo" type="text" class="validate" name="endereco" maxlength="255" value="<%= editarPessoa.getPessoa().getEndereco() %>">
+                            <input  id="enderecoCampo" type="text" class="validate" name="endereco" maxlength="255" value="<%= editarPessoa.getPessoa().getEndereco()%>">
 
                             <label id="enderecoLabel" for="enderecoCampo">Endereço</label>
 
@@ -180,15 +190,15 @@
                 </div>
 
                 <div class="card-action">
-                    
-                    <input type="hidden" name="page" value="addPessoa"></input>
-                    
+
+                    <input type="hidden" name="page" value="confirmarEditarPessoa"></input>
+
                     <button class="btn waves-effect red darken-4" type="submit" id="btn-cadastrar" >
-                        Confirmar Cadastro
-                        <i class="material-icons right">person_add</i>
+                        Confirmar Alteração
+                        <i class="material-icons right">edit</i>
                     </button>
 
-                    <a href="/RedLab" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
+                    <a href="/control?page=searchPessoa" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
                         Voltar
                         <i class="material-icons right">undo</i>
                     </a>

@@ -7,6 +7,7 @@ package controllers;
 
 import controllers.commands.CallCadastroCommand;
 import controllers.commands.CallDeletaPessoaActionCommand;
+import controllers.commands.CallEditaPessoaActionCommand;
 import controllers.commands.CallLoginActionCommand;
 import controllers.commands.CallLogoutActionCommand;
 import controllers.commands.CallPageAdminCommand;
@@ -46,6 +47,7 @@ public class MainController extends HttpServlet {
         comandos.put("searchPessoa", new CallSearchPessoaActionCommand());
         comandos.put("deletarPessoa", new CallDeletaPessoaActionCommand());
         comandos.put("editarPessoa", new CallPageEditaPessoaCommand());
+        comandos.put("confirmarEditarPessoa", new CallEditaPessoaActionCommand());
         comandos.put("usuario", new CallUsuarioPageCommand());
     }
     
