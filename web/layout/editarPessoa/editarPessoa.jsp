@@ -1,6 +1,8 @@
 <%@page import="controllers.Mensagem"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="model.Usuario"%>
 <%
+    Usuario editarPessoa = (Usuario) request.getAttribute("usuario");
     ArrayList<Mensagem> mensagens = (ArrayList<Mensagem>) request.getAttribute("msgs");
 %>
 
@@ -16,7 +18,8 @@
 
                         </div>                        
 
-                        <%                            if (mensagens != null) {
+                        <%                           
+                            if (mensagens != null) {
                         %>
                         <div class="errorsMsg"
                              <%
@@ -51,35 +54,13 @@
                                     }
                                 %>
                             </div>
-                            <input  id="loginCampo" type="text" class="validate" name="login" maxlength="20">
+                                <input  id="loginCampo" type="text" class="validate" name="login" maxlength="20" value="<%= editarPessoa.getLogin() %>">
 
                             <label id="loginLabel" for="loginCampo"><span class="cancelRed">*</span>Login</label>
 
-                        </div>
-
+                        </div>         
+                                
                         <div class="input-field col s12 m6">
-                            <div>
-                                <%
-                                    if (mensagens != null) {
-                                        for (Mensagem msg : mensagens) {
-                                            if (msg.getContexto().equals("senha")) {
-                                %>
-                                <p><%= msg.getMensagem()%></p>
-                                <%
-                                            }
-                                        }
-                                    }
-                                %>
-                            </div>
-                            <input  id="senhaCampo" type="password" class="validate" name="senha" maxlength="50">
-
-                            <label id="senhaLabel" for="senhaCampo"><span class="cancelRed">*</span>Senha</label>
-
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-field col s12">
                             <div>
                                 <%
                                     if (mensagens != null) {
@@ -93,7 +74,7 @@
                                     }
                                 %>
                             </div>
-                            <input  id="nomeCampo" type="text" class="validate" name="nome" maxlength="150">
+                            <input  id="nomeCampo" type="text" class="validate" name="nome" maxlength="150" value="<%= editarPessoa.getPessoa().getNome() %>">
 
                             <label id="nomeLabel" for="nomeCampo"><span class="cancelRed">*</span>Nome</label>
 
@@ -115,7 +96,7 @@
                                     }
                                 %>
                             </div>
-                            <input  id="telefoneCampo" type="text" class="validate" name="telefone" maxlength="20">
+                            <input  id="telefoneCampo" type="text" class="validate" name="telefone" maxlength="20" value="<%= editarPessoa.getPessoa().getTelefone() %>">
 
                             <label id="telefoneLabel" for="telefoneCampo"><span class="cancelRed">*</span>Telefone</label>
 
@@ -142,9 +123,9 @@
                                 %>
                             </div>
                             <select id="sexoCampo" name="sexo">
-                                <option value="" disabled selected>Sexo</option>
-                                <option value="M" >Masculino</option>
-                                <option value="F" >Feminino</option>
+                                <option value="" disabled <%= ( !editarPessoa.getPessoa().getSexo().equals("M") && !editarPessoa.getPessoa().getSexo().equals("F") ) ? "selected" : "" %> >Sexo</option>
+                                <option value="M" <%= (editarPessoa.getPessoa().getSexo().equals("M")) ? "selected" : "" %>>Masculino</option>
+                                <option value="F" <%= (editarPessoa.getPessoa().getSexo().equals("F")) ? "selected" : "" %>>Feminino</option>
                             </select>
                             <label id="sexoLabel" for="sexoCampo"><span class="cancelRed">*</span>Escolha um sexo</label>
 
@@ -167,7 +148,7 @@
                                     }
                                 %>
                             </div>
-                            <input  id="cpfCampo" type="text" class="validate" name="cpf" maxlength="11">
+                            <input  id="cpfCampo" type="text" class="validate" name="cpf" maxlength="11" value="<%= editarPessoa.getPessoa().getCpf() %>">
 
                             <label id="cpfLabel" for="cpfCampo"><span class="cancelRed">*</span>CPF</label>
 
@@ -189,7 +170,7 @@
                                     }
                                 %>
                             </div>
-                            <input  id="enderecoCampo" type="text" class="validate" name="endereco" maxlength="255">
+                            <input  id="enderecoCampo" type="text" class="validate" name="endereco" maxlength="255" value="<%= editarPessoa.getPessoa().getEndereco() %>">
 
                             <label id="enderecoLabel" for="enderecoCampo">Endereço</label>
 
@@ -199,15 +180,17 @@
                 </div>
 
                 <div class="card-action">
+                    
                     <input type="hidden" name="page" value="addPessoa"></input>
+                    
                     <button class="btn waves-effect red darken-4" type="submit" id="btn-cadastrar" >
                         Confirmar Cadastro
                         <i class="material-icons right">person_add</i>
                     </button>
 
                     <a href="/RedLab" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
-                    Voltar
-                    <i class="material-icons right">undo</i>
+                        Voltar
+                        <i class="material-icons right">undo</i>
                     </a>
                 </div>
             </form>
