@@ -1,12 +1,11 @@
 <%@page import="java.util.List"%>
 <%@page import="model.Exame"%>
-<div class="col s12 m7">
+<div class="col s12">
         <%
             List<Exame> exames = (List<Exame>)request.getAttribute("exames");
         %>
         <table class="highlight bordered">
             <thead>
-                <div class="divider"></div>
             <h5>Exames mais recentes:</h5>
                 <tr>
                     <th data-field="id">ID</th>

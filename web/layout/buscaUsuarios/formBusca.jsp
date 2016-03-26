@@ -12,7 +12,7 @@
             <div class="input-field col s12">
 
                 <input  id="loginCampo" type="text" class="validate" name="login" >
-                <label id="loginLabel" for="loginCampo"><span class="cancelRed">*</span>Login</label>
+                <label id="loginLabel" for="loginCampo" value="<%= (searchUser != null) ? searchUser.getLogin() : "" %>"><span class="cancelRed">*</span>Login</label>
 
             </div>
         </div>
@@ -22,7 +22,7 @@
             Buscar
             <i class="material-icons right">search</i>
         </button>
-        <a href="control?page=searchExames" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
+        <a href="control?page=searchPessoa" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
         Desfazer
         <i class="material-icons right">delete</i>
         </a>
