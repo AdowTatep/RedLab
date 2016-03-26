@@ -30,7 +30,6 @@ public class CallPageEditaPessoaCommand implements CommandApp {
         String pagina = "editarPessoa";
         String caminho = new Helpers().geraCaminho(pagina);
         
-        
         request.setAttribute("usuario", usuarioEditar);
         request.setAttribute("page", pagina);
         request.setAttribute("path", caminho);

@@ -105,13 +105,13 @@
 
 
         <div class="modal-footer">
+            
             <button style="background-color: initial !important;" class="modal-action waves-effect btn-flat" type="submit" id="btn-cadastrar" name="page" value="addExame">
                 Confirmar Cadastro
                 <i class="material-icons right">playlist_add</i>
             </button>
         </div>
 
-        <input type="hidden" name="page" value="addPessoa"></input>
     </form>
 
     <script src="js/validaCadastroExame.js"></script>

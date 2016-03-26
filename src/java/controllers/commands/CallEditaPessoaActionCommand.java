@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Pessoa;
 import model.Usuario;
 import model.dao.UsuarioJpaController;
 
@@ -25,11 +26,14 @@ public class CallEditaPessoaActionCommand implements CommandApp {
         RequestDispatcher rd = request.getRequestDispatcher("/control?login=&senha=");
         
         //Cria usuario
-        Usuario editarPessoa = new Usuario(request);
+        Usuario editarUsuario = new Usuario(request);
+        Pessoa editarPessoa = new Pessoa(request, editarUsuario);
+        
+        editarUsuario.setPessoa(editarPessoa);
         
         //Edita o usuário
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
-        new UsuarioJpaController(emf).edit(editarPessoa);
+        new UsuarioJpaController(emf).edit(editarUsuario);        
         
         String pagina = "searchPessoa";
         String caminho = new Helpers().geraCaminho(pagina);

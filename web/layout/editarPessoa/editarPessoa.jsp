@@ -15,13 +15,12 @@
                     <div class="content-center msgs">
                         <div class="topMsg">
                             <span class="wlcMessage">Editar Cliente</span>
-
                         </div>                        
 
                         <%
                             if (mensagens != null) {
                         %>
-                        <div class="errorsMsg"
+                        <div class="errorsMsg">
                              <%
                                  for (Mensagem msg : mensagens) {
                                      if (msg.getContexto().equals("cadastro")) {
@@ -64,7 +63,7 @@
                             
                             <input type="checkbox" id="adminCampo" name="isAdmin" />
 
-                        <label id="adminLabel" for="adminCampo">É admin?</label>
+                            <label id="adminLabel" for="adminCampo">É admin?</label>
 
                         </div>
                     </div>
@@ -192,19 +191,18 @@
                 <div class="card-action">
 
                     <input type="hidden" name="page" value="confirmarEditarPessoa"></input>
-
+                    
                     <button class="btn waves-effect red darken-4" type="submit" id="btn-cadastrar" >
                         Confirmar Alteração
-                        <i class="material-icons right">edit</i>
+                        <i class="material-icons right">person_add</i>
                     </button>
 
-                    <a href="/control?page=searchPessoa" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
+                    <a href="control?page=searchPessoa" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
                         Voltar
                         <i class="material-icons right">undo</i>
                     </a>
                 </div>
             </form>
-            <script src="js/validaCadastro.js"></script>
         </div>
     </div>
 </section>
