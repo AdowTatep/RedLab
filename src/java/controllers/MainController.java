@@ -44,7 +44,7 @@ public class MainController extends HttpServlet {
         comandos.put("addPessoa", new CallCadastroCommand());
         comandos.put("searchPessoa", new CallSearchPessoaActionCommand());
         comandos.put("deletarPessoa", new CallDeletaPessoaActionCommand());
-        comandos.put("user", new CallUsuarioPageCommand());
+        comandos.put("usuario", new CallUsuarioPageCommand());
     }
     
     /**
@@ -68,8 +68,8 @@ public class MainController extends HttpServlet {
         
         //Verifica se já existe um usuário logado
         Usuario user = (Usuario)request.getSession().getAttribute("usuario");
-        if(user!=null && (pagina.equals("login") || pagina.equals("admin") || pagina.equals("user")) ){
-            pagina = (user.getIsAdmin()) ? "admin"  : "user" ;
+        if(user!=null && (pagina.equals("login") || pagina.equals("admin") || pagina.equals("usuario")) ){
+            pagina = (user.getIsAdmin()) ? "admin"  : "usuario" ;
         }
         
         String titulo = (request.getAttribute("title") == null)? "Red Lab Laboratórios" : (String)request.getAttribute("title");
