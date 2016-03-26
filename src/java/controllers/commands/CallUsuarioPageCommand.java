@@ -15,14 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import model.Exame;
 import model.Usuario;
 import model.dao.ExameJpaController;
-import model.dao.PessoaJpaController;
-import model.dao.UsuarioJpaController;
 
 /**
  *
- * @author adowt
+ * @author Diego
  */
-public class CallPageAdminCommand implements CommandApp {
+public class CallUsuarioPageCommand implements CommandApp{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -34,18 +32,14 @@ public class CallPageAdminCommand implements CommandApp {
         //Pega qual página quer ser acessada, e gera o caminho customizado
         Helpers help = new Helpers();
         
-        String pagina = "admin";
+        String pagina = "usuario";
         String caminho = help.geraCaminho(pagina);
                 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
         
         //Pega os exames
-        List<Exame> exames = new ExameJpaController(emf).findExameEntities();        
+        List<Exame> exames = new ExameJpaController(emf).findExameEntities(); 
         
-        //Pega os usuarios(Para mostrar na lista de cadastro de exame)
-        List<Usuario> usuarios = new UsuarioJpaController(emf).findUsuarioEntities();
-                
-        request.setAttribute("users", usuarios);
         request.setAttribute("page", pagina);
         request.setAttribute("path", caminho);
         request.setAttribute("exames", exames);        

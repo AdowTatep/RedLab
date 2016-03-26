@@ -12,6 +12,7 @@ import controllers.commands.CallLogoutActionCommand;
 import controllers.commands.CallPageAdminCommand;
 import controllers.commands.CallPageBasedOnAttributeCommand;
 import controllers.commands.CallSearchPessoaActionCommand;
+import controllers.commands.CallUsuarioPageCommand;
 import controllers.commands.CommandApp;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class MainController extends HttpServlet {
         comandos.put("addPessoa", new CallCadastroCommand());
         comandos.put("searchPessoa", new CallSearchPessoaActionCommand());
         comandos.put("deletarPessoa", new CallDeletaPessoaActionCommand());
+        comandos.put("user", new CallUsuarioPageCommand());
     }
     
     /**
@@ -66,12 +68,7 @@ public class MainController extends HttpServlet {
         
         //Verifica se já existe um usuário logado
         Usuario user = (Usuario)request.getSession().getAttribute("usuario");
-        if(user!=null && !pagina.equals("logout") 
-                && !pagina.equals("addPessoa") 
-                && !pagina.equals("searchPessoa") 
-                && !pagina.equals("searchExame") 
-                && !pagina.equals("deletarPessoa") 
-                && !pagina.equals("deletarExame") ){
+        if(user!=null && (pagina.equals("login") || pagina.equals("admin") || pagina.equals("user")) ){
             pagina = (user.getIsAdmin()) ? "admin"  : "user" ;
         }
         
@@ -91,7 +88,7 @@ public class MainController extends HttpServlet {
                 //No final, redireciona
                 rd.forward(request, response);  
             } else {
-                //Senão for nula chama o comando correspondente
+                //Se não for nula chama o comando correspondente
                 comandos.get(pagina).execute(request, response);
             }
         } catch (Exception ex) {

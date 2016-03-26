@@ -1,2 +1,6 @@
 /build/
 /dist/
+nbproject/ant-deploy.xml
+nbproject/private/private.xml
+nbproject/project.properties
+nbproject/private/private.properties
