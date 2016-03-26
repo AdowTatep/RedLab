@@ -39,7 +39,7 @@
             <br>
             <div class="card">
                 <div class="card-content">
-                    <h5>Total: <%= totalFaturado %></h5>
+                    <h5>Total: R$ <%= totalFaturado %></h5>
                 </div>
             </div>
     </div>

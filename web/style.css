@@ -75,3 +75,9 @@ footer {
     bottom:0;
     width:100%;
 }
+
+.fixed-action-btn {
+    right: 30px !important;
+    top: 80px !important;
+    bottom: initial;
+}
