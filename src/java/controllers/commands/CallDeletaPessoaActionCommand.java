@@ -17,7 +17,7 @@ public class CallDeletaPessoaActionCommand implements CommandApp{
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         
         
-        RequestDispatcher rd  = request.getRequestDispatcher("/control?page=searchPessoa");
+        RequestDispatcher rd  = request.getRequestDispatcher("/control?login=null&senha=null");
         Usuario usuDeletar = new Usuario(request);
         Pessoa pesDeletar = new Pessoa(request, usuDeletar);
         
@@ -25,6 +25,8 @@ public class CallDeletaPessoaActionCommand implements CommandApp{
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedLabPU");
         new UsuarioJpaController(emf).deletaUsuario(usuDeletar);
+        
+        request.setAttribute("page", "searchPessoa");
         
         rd.forward(request, response);
         

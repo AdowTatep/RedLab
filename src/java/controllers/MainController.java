@@ -68,7 +68,7 @@ public class MainController extends HttpServlet {
         
         //Verifica se já existe um usuário logado
         Usuario user = (Usuario)request.getSession().getAttribute("usuario");
-        if(user!=null && (pagina.equals("login") || pagina.equals("admin") || pagina.equals("usuario")) ){
+        if(user!=null && (pagina.equals("login") || pagina.equals("admin") || pagina.equals("usuario") || pagina.equals("home")) ){
             pagina = (user.getIsAdmin()) ? "admin"  : "usuario" ;
         }
         

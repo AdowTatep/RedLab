@@ -40,10 +40,11 @@
                                         <input  id="sexoCampo" type="hidden" name="sexo" maxlength="1" value="<%= usu.getPessoa().getSexo() %>">
                                         <input  id="enderecoCampo" type="hidden" name="endereco"  value="<%= usu.getPessoa().getEndereco() %>">
                                         
-                                        
-                                        <input  type="hidden" name="page"  value="deletarPessoa">
-                                        
-                                        <button class="btn-floating btn-flat waves-effect waves-circle red darken-4" type="submit" >
+                                                                                
+                                        <button class="btn-floating btn-flat waves-effect waves-circle blue darken-2" type="submit" name="page"  value="editarPessoa" >
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                        <button class="btn-floating btn-flat waves-effect waves-circle red darken-4" type="submit" name="page"  value="deletarPessoa" >
                                             <i class="material-icons">delete_forever</i>
                                         </button>
                                     </form>                                        
