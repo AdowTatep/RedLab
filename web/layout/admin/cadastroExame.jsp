@@ -74,7 +74,7 @@
 
                     <div class="input-field col s12 m6">
 
-                        <input  id="jejumCampo" type="text" class="validate" name="jejum">
+                        <input  id="jejumCampo" type="text" class="validate" name="jejum" maxlength="2">
 
                         <label id="jejumLabel" for="jejumCampo"><span class="cancelRed">*</span>Tempo de jejum(hrs)</label>
 
@@ -93,7 +93,7 @@
 
                     <div class="input-field col s12 m6">
 
-                        <input  id="horaEntregaCampo" type="text" class="validate" name="horaEntrega">
+                        <input  id="horaEntregaCampo" type="text" class="validate" name="horaEntrega" maxlength="2">
 
                         <label id="horaEntregaLabel" for="horaEntregaCampo"><span class="cancelRed">*</span>Hora de entrega(Hrs)</label>
 
@@ -119,11 +119,11 @@
 
 <script>
                     $(document).ready(function () {
-                        
+
                        $('.modal-trigger').leanModal({
                             complete: function() { $("div.lean-overlay").remove(); } 
                           }
                         );
-                
+
                     });
 </script>

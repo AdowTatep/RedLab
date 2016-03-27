@@ -74,17 +74,17 @@ function  validaFormCampos(descricao, custo, pessoa, tempoJejum, horaEntrega) {
         $("#jejumLabel").text("Tempo de jejum(hrs)");
     }
     
-    if(horaEntregaLabel == ""){
+    if(horaEntrega == ""){
         temErro = true;
         Materialize.toast('A Hora de entrega precisa ser preenchido', timeout);
         $("#horaEntregaLabel").text("A Hora de entrega precisa ser preenchido");
         $("#horaEntregaLabel").addClass("cancelRed");
-    } else if (horaEntregaLabel.length > 2) {
+    } else if (horaEntrega.length > 2) {
         temErro = true;
         Materialize.toast('A Hora de entrega pode ter no máximo 2 caracteres', timeout);
         $("#horaEntregaLabel").text("A Hora de entrega pode ter no máximo 2 caracteres");
         $("#horaEntregaLabel").addClass("cancelRed");
-    } else if (horaEntregaLabel.length < 1) {
+    } else if (horaEntrega.length < 1) {
         temErro = true;
         Materialize.toast('A Hora de entrega precisa ter no mínimo 1 caracter', timeout);
         $("#horaEntregaLabel").text("A Hora de entrega precisa ter no mínimo 1 caracter");
@@ -98,28 +98,19 @@ function  validaFormCampos(descricao, custo, pessoa, tempoJejum, horaEntrega) {
 }
 
 function onSubmit() {
-    var $form = $("#cadastrarFormulario"),
-            login = $form.find('input[name="login"]').val(),
-            senha = $form.find('input[name="senha"]').val(),
-            nome = $form.find('input[name="nome"]').val(),
-            telefone = $form.find('input[name="telefone"]').val(),
-            sexo = $('.select-dropdown').val(),
-            cpf = $form.find('input[name="cpf"]').val(),
-            endereco = $form.find('input[name="endereco"]').val(),
+    var $form = $("#cadastroExame"),
+            descricao = $form.find('input[name="descricao"]').val(),
+            custo = $form.find('input[name="custo"]').val(),
+            pessoa = $('.select-dropdown').val(),
+            tempoJejum = $form.find('input[name="jejum"]').val(),
+            horaEntrega = $form.find('input[name="horaEntrega"]').val(),
             page = $form.find('button[name="page"]').val(),
             url = $form.attr('action');
             
             console.log(page);
-            
-            //Cuida do sexo, o framework não deixa no HTML as informações "F" e "M"
-            if (sexo == "Feminino") {
-                sexo = "F";
-            } else if (sexo == "Masculino"){
-                sexo = "M";
-            }
 
-    if(!validaFormCampos(login, senha, nome, telefone, sexo, cpf, endereco, page, url)){
-        console.log("eoq");
+    if(!validaFormCampos(descricao, custo, pessoa, tempoJejum, horaEntrega, page, url)){
+        console.log("eoqueijo");
         Materialize.toast('Cadastrando informações...', 5000);
         $form.submit();
 //        $('.modal-trigger').leanModal();
@@ -127,11 +118,11 @@ function onSubmit() {
     }
 }
 
-$("#cadastrarFormulario").submit(function (e) {
+$("#cadastroExame").submit(function (e) {
     
 });
 
-$("#cadastrarFormulario").keypress(function (e) {
+$("#cadastroExame").keypress(function (e) {
     if (e.keyCode == 13) {
         e.preventDefault();
         onSubmit();
