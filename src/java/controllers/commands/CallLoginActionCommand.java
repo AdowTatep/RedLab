@@ -47,5 +47,4 @@ public class CallLoginActionCommand implements CommandApp {
 
         rd.forward(request, response);
     }
-    
 }

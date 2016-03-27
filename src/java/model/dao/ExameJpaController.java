@@ -175,5 +175,4 @@ public class ExameJpaController implements Serializable {
         
         return (List<Exame>) q.getResultList();
     }
-    
 }
