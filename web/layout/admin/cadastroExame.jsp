@@ -95,7 +95,7 @@
 
                         <input  id="horaEntregaCampo" type="text" class="validate" name="horaEntrega">
 
-                        <label id="horaEntregaLabel" for="horaEntregaCampo"><span class="cancelRed">*</span>Hora de entrega</label>
+                        <label id="horaEntregaLabel" for="horaEntregaCampo"><span class="cancelRed">*</span>Hora de entrega(Hrs)</label>
 
                     </div>                
                 </div>             

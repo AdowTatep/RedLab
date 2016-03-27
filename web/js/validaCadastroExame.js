@@ -1,6 +1,6 @@
 /* global Materialize */
 
-function  validaFormCampos(descricao, custo, pessoa, tempoJejum, data, horaEntrega) {
+function  validaFormCampos(descricao, custo, pessoa, tempoJejum, horaEntrega) {
     var timeout = 5000;
     
     var temErro = false;
@@ -21,7 +21,7 @@ function  validaFormCampos(descricao, custo, pessoa, tempoJejum, data, horaEntre
         $("#descrLabel").addClass("cancelRed");
     } else {
         $("#descrLabel").addClass("checkGreen");
-        $("#descrLabel").text("descricao");
+        $("#descrLabel").text("Descricao(nome)");
     }
     
     if(custo == "") {
@@ -41,78 +41,60 @@ function  validaFormCampos(descricao, custo, pessoa, tempoJejum, data, horaEntre
         $("#custoLabel").addClass("cancelRed");
     } else {
         $("#custoLabel").addClass("checkGreen");
-        $("#custoLabel").text("Senha");
+        $("#custoLabel").text("Custo");
     }
     
-    if(nome==""){
+    if(pessoa=="Pessoa"){
         temErro = true;
-        Materialize.toast('O campo nome não pode estar vazio', timeout);
-        $("#nomeLabel").text("O campo nome não pode estar vazio");
-        $("#nomeLabel").addClass("cancelRed");
-    } else if (nome.length>150) {
-        temErro = true;
-        Materialize.toast('O campo nome só pode ter 150 caracteres', timeout);
-        $("#nomeLabel").text("O campo nome só pode ter 150 caracteres");
-        $("#nomeLabel").addClass("cancelRed");
+        Materialize.toast('Por favor, escolha um cliente.', timeout);
+        $("#pessoaCampo").text("O campo pessoa precisa estar selecionado");
+        $("#pessoaCampo").addClass("cancelRed");
     } else {
-        $("#nomeLabel").addClass("checkGreen");
-        $("#nomeLabel").text("Nome");
+        $("#pessoaCampo").addClass("checkGreen");
+        $("#pessoaCampo").text("Escolha uma pessoa");
     }
     
-    if(telefone == ""){
+    if(tempoJejum == ""){
         temErro = true;
-        Materialize.toast('O campo telefone precisa ser preenchido', timeout);
-        $("#telefoneLabel").text("O campo telefone precisa ser preenchido");
-        $("#telefoneLabel").addClass("cancelRed");
-    } else if (telefone.length > 20) {
+        Materialize.toast('O tempo de Jejum precisa ser preenchido', timeout);
+        $("#jejumLabel").text("O tempo de Jejum precisa ser preenchido");
+        $("#jejumLabel").addClass("cancelRed");
+    } else if (tempoJejum.length > 2) {
         temErro = true;
-        Materialize.toast('O campo de telefone só pode ter no máximo 20 caracteres', timeout);
-        $("#telefoneLabel").text("O campo de telefone só pode ter no máximo 20 caracteres");
-        $("#telefoneLabel").addClass("cancelRed");
-    } else if (telefone.length < 8) {
+        Materialize.toast('O campo tempo de Jejum pode ter no máximo 2 caracteres', timeout);
+        $("#jejumLabel").text("O campo tempo de Jejum pode ter no máximo 2 caracteres");
+        $("#jejumLabel").addClass("cancelRed");
+    } else if (tempoJejum.length < 1) {
         temErro = true;
-        Materialize.toast('O telefone precisa ter no mínimo 8 caracteres', timeout);
-        $("#telefoneLabel").text("O telefone precisa ter no mínimo 8 caracteres");
-        $("#telefoneLabel").addClass("cancelRed");
+        Materialize.toast('O campo tempo de Jejum precisa ter no mínimo 1 caracter', timeout);
+        $("#jejumLabel").text("O campo tempo de Jejum precisa ter no mínimo 1 caracter");
+        $("#jejumLabel").addClass("cancelRed");
     } else {
-        $("#telefoneLabel").addClass("checkGreen");
-        $("#telefoneLabel").text("Telefone");
+        $("#jejumLabel").addClass("checkGreen");
+        $("#jejumLabel").text("Tempo de jejum(hrs)");
     }
     
-    if(sexo=="" || (sexo != "M" && sexo != "F")){
+    if(horaEntregaLabel == ""){
         temErro = true;
-        Materialize.toast('O valor do sexo é inválido', timeout);
-        $("#sexoLabel").text("O valor do sexo é inválido");
-        $("#sexoLabel").addClass("cancelRed");
+        Materialize.toast('A Hora de entrega precisa ser preenchido', timeout);
+        $("#horaEntregaLabel").text("A Hora de entrega precisa ser preenchido");
+        $("#horaEntregaLabel").addClass("cancelRed");
+    } else if (horaEntregaLabel.length > 2) {
+        temErro = true;
+        Materialize.toast('A Hora de entrega pode ter no máximo 2 caracteres', timeout);
+        $("#horaEntregaLabel").text("A Hora de entrega pode ter no máximo 2 caracteres");
+        $("#horaEntregaLabel").addClass("cancelRed");
+    } else if (horaEntregaLabel.length < 1) {
+        temErro = true;
+        Materialize.toast('A Hora de entrega precisa ter no mínimo 1 caracter', timeout);
+        $("#horaEntregaLabel").text("A Hora de entrega precisa ter no mínimo 1 caracter");
+        $("#horaEntregaLabel").addClass("cancelRed");
     } else {
-        $("#sexoLabel").addClass("checkGreen");
-        $("#sexoLabel").text("Escolha um sexo");
-    }
-    
-    if (cpf == "") {
-        temErro = true;
-        Materialize.toast('O campo CPF não pode estar vazio', timeout);
-        $("#cpfLabel").text("O campo CPF não pode estar vazio");
-        $("#cpfLabel").addClass("cancelRed");
-    } else if (cpf.length != 11) {
-        temErro = true;
-        Materialize.toast('O campo CPF precisa de 11 caracteres', timeout);
-        $("#cpfLabel").text("O campo CPF precisa de 11 caracteres");
-        $("#cpfLabel").addClass("cancelRed");
-    } else {
-        $("#cpfLabel").addClass("checkGreen");
-        $("#cpfLabel").text("CPF");
-    }
-    
-    if(endereco.length > 255){
-        temErro = true;
-        Materialize.toast('Endereço só pode ter 255 caracteres', timeout);
-        $("#enderecoLabel").text("Endereço só pode ter 255 caracteres");
-        $("#enderecoLabel").addClass("cancelRed");
+        $("#horaEntregaLabel").addClass("checkGreen");
+        $("#horaEntregaLabel").text("Hora de entrega(Hrs)");
     }
     
     return temErro;
-    
 }
 
 function onSubmit() {
