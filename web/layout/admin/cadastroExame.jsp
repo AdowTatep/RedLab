@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="model.Usuario"%>
 <div id="modalAddExame" class="modal modal-fixed-footer">    
-    <form id="cadastrarFormulario" method="POST" action="control" class="">
+    <form id="cadastroExame" method="POST" action="control" class="">
         <div class="modal-content">
 
             <div class="content-center msgs">

@@ -1,6 +1,6 @@
 /* global Materialize */
 
-function  validaFormCampos(descricao, custo, pessoa, tempoJejum, horaEntrega) {
+function  validaFormExame(descricao, custo, pessoa, tempoJejum, horaEntrega) {
     var timeout = 5000;
     
     var temErro = false;
@@ -109,7 +109,7 @@ function onSubmit() {
             
             console.log(page);
 
-    if(!validaFormCampos(descricao, custo, pessoa, tempoJejum, horaEntrega, page, url)){
+    if(!validaFormExame(descricao, custo, pessoa, tempoJejum, horaEntrega, page, url)){
         console.log("eoqueijo");
         Materialize.toast('Cadastrando informações...', 5000);
         $form.submit();

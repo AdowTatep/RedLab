@@ -1,6 +1,6 @@
 /* global Materialize */
 
-function  validaFormCampos(login, senha, nome, telefone, sexo, cpf, endereco, url) {
+function  validaFormCadastro(login, senha, nome, telefone, sexo, cpf, endereco, url) {
     var timeout = 5000;
     
     var temErro = false;
@@ -136,7 +136,7 @@ function onSubmit() {
                 sexo = "M";
             }
 
-    if(!validaFormCampos(login, senha, nome, telefone, sexo, cpf, endereco, page, url)){
+    if(!validaFormCadastro(login, senha, nome, telefone, sexo, cpf, endereco, page, url)){
         console.log("eoq");
         Materialize.toast('Cadastrando informações...', 5000);
         $form.submit();
