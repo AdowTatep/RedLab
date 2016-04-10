@@ -48,7 +48,7 @@
                                 for (Usuario usu : usuarios) {
                                     if (!usu.getIsAdmin()) {
                         %>
-                        <option value="<%= usu.getLogin()%>" ><%= usu.getPessoa().getNome() + " - " + usu.getLogin()%></option>
+                        <option value="<%= usu.getLogin()%>" ><%=usu.getLogin()%></option>
                         <%
                                     }
                                 }
@@ -103,10 +103,9 @@
 
         </div>
 
-
         <div class="modal-footer">
             
-            <button style="background-color: initial !important;" class="modal-action waves-effect btn-flat" type="submit" id="btn-cadastrar" name="page" value="addExame">
+            <button style="background-color: initial !important;" class="modal-action waves-effect btn-flat" type="submit" id="btn-cadastrar" name="page" value="cadastroExame">
                 Confirmar Cadastro
                 <i class="material-icons right">playlist_add</i>
             </button>
@@ -114,7 +113,9 @@
 
     </form>
 
+    <!--
     <script src="js/validaCadastroExame.js"></script>
+    -->
 </div>
 
 <script>
@@ -127,3 +128,4 @@
 
                     });
 </script>
+

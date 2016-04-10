@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -58,6 +59,21 @@ public class Exame implements Serializable {
     private Pessoa loginPessoa;
 
     public Exame() {
+    }
+    
+    public Exame(HttpServletRequest request, Pessoa p) {
+        this.populatePessoaUsingParameters(request, p);
+    }
+    
+    private void populatePessoaUsingParameters(HttpServletRequest request, Pessoa p) {
+        this.setDescricao((request.getParameter("descricao") == null) ? "" : request.getParameter("descricao"));
+        this.setCusto((request.getParameter("custo")==null) ? 0 : Double.parseDouble(request.getParameter("custo")) );
+        this.setIsEntregue((request.getParameter("entregue")==null) ? false : true);
+        this.setTempoJejum((request.getParameter("jejum")==null) ? "": request.getParameter("jejum"));
+        this.setDataEntrega((request.getParameter("dataEntrega")==null) ? "": request.getParameter("dataEntrega"));
+        this.setHoraEntrega((request.getParameter("horaEntrega")==null) ? "": request.getParameter("horaEntrega"));
+        
+        this.setLoginPessoa(p);
     }
 
     public Exame(Integer id) {

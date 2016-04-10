@@ -6,6 +6,7 @@
 package controllers;
 
 import controllers.commands.CallCadastroCommand;
+import controllers.commands.CallCadastroExameCommand;
 import controllers.commands.CallDeletaPessoaActionCommand;
 import controllers.commands.CallEditaPessoaActionCommand;
 import controllers.commands.CallLoginActionCommand;
@@ -49,6 +50,7 @@ public class MainController extends HttpServlet {
         comandos.put("editarPessoa", new CallPageEditaPessoaCommand());
         comandos.put("confirmarEditarPessoa", new CallEditaPessoaActionCommand());
         comandos.put("usuario", new CallUsuarioPageCommand());
+        comandos.put("cadastroExame", new CallCadastroExameCommand());
     }
     
     /**

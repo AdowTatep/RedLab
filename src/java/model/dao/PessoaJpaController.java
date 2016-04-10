@@ -264,5 +264,18 @@ public class PessoaJpaController implements Serializable {
             throw ex;
         }
      }
+     
+     public Pessoa findPessoaFromUsuarioByLogin(String login) throws NonUniqueResultException, NoResultException {
+        String jpql = "select p from Pessoa p where p.login = :log";
+        
+        Query q = getEntityManager().createQuery(jpql);
+        q.setParameter("log", login);
+        
+        try {
+            return (Pessoa) q.getSingleResult();
+        } catch (NonUniqueResultException | NoResultException ex) {
+            throw ex;
+        }
+     }
     
 }
