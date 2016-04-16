@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <input type="hidden" name="page" value="searchExame"></input>
+        <input type="hidden" name="page" value="searchExames"></input>
         <button class="btn waves-effect red darken-4" type="submit" id="btn-cadastrar" >
             Buscar
             <i class="material-icons right">search</i>
