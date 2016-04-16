@@ -48,7 +48,7 @@
                                 for (Usuario usu : usuarios) {
                                     if (!usu.getIsAdmin()) {
                         %>
-                        <option value="<%= usu.getLogin()%>" ><%=usu.getLogin()%></option>
+                        <option value="<%= usu.getLogin()%>" ><%=usu.getPessoa().getNome() %> - <%=usu.getLogin()%></option>
                         <%
                                     }
                                 }
@@ -76,7 +76,7 @@
 
                         <input  id="jejumCampo" type="text" class="validate" name="jejum" maxlength="2">
 
-                        <label id="jejumLabel" for="jejumCampo"><span class="cancelRed">*</span>Tempo de jejum(hrs)</label>
+                        <label id="jejumLabel" for="jejumCampo">Tempo de jejum(hrs)</label>
 
                     </div>                
                 </div>             
@@ -95,7 +95,7 @@
 
                         <input  id="horaEntregaCampo" type="text" class="validate" name="horaEntrega" maxlength="2">
 
-                        <label id="horaEntregaLabel" for="horaEntregaCampo"><span class="cancelRed">*</span>Hora de entrega(Hrs)</label>
+                        <label id="horaEntregaLabel" for="horaEntregaCampo">Hora de entrega(Hrs)</label>
 
                     </div>                
                 </div>             
