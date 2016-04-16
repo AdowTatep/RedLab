@@ -175,4 +175,13 @@ public class ExameJpaController implements Serializable {
         
         return (List<Exame>) q.getResultList();
     }
+    
+    public List<Exame> findExameByDescricao(String descricao){
+        String jpql = "select e from Exame e where e.descricao = :descricao";
+        
+        Query q = getEntityManager().createQuery(jpql);
+        q.setParameter("descricao", descricao);
+        
+        return (List<Exame>) q.getResultList();
+    }
 }
