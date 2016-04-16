@@ -17,5 +17,4 @@
 
         <jsp:include page='<%= "exameTabela.jsp"%>' />
     </div>
-
 </section>
