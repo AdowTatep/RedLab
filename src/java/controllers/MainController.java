@@ -14,6 +14,7 @@ import controllers.commands.CallLogoutActionCommand;
 import controllers.commands.CallPageAdminCommand;
 import controllers.commands.CallPageBasedOnAttributeCommand;
 import controllers.commands.CallPageEditaPessoaCommand;
+import controllers.commands.CallSearchExamesCommand;
 import controllers.commands.CallSearchPessoaActionCommand;
 import controllers.commands.CallUsuarioPageCommand;
 import controllers.commands.CommandApp;
@@ -51,6 +52,7 @@ public class MainController extends HttpServlet {
         comandos.put("confirmarEditarPessoa", new CallEditaPessoaActionCommand());
         comandos.put("usuario", new CallUsuarioPageCommand());
         comandos.put("cadastroExame", new CallCadastroExameCommand());
+        comandos.put("searchExames", new CallSearchExamesCommand());
     }
     
     /**
