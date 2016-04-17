@@ -38,12 +38,12 @@ public class CallPageEditarExameCommand implements CommandApp{
         
         Exame exame = new ExameJpaController(emf).findExameByDescCustoUser(descricaoExame, p, custo);
         
-        List<Usuario> usuario = new UsuarioJpaController(emf).findUsuarioEntities();
+        List<Usuario> usuarios = new UsuarioJpaController(emf).findUsuarioEntities();
         
         String pagina = "editarExame";
         String caminho = new Helpers().geraCaminho(pagina);
         
-        request.setAttribute("usuario", usuario);
+        request.setAttribute("usuarios", usuarios);
         request.setAttribute("exame", exame);
         request.setAttribute("page", pagina);
         request.setAttribute("path", caminho);

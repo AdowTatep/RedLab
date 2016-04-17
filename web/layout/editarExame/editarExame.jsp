@@ -49,10 +49,10 @@
                         <div class="input-field col s12 m8">
 
                             <select id="pessoaCampo" name="pessoa">
-                                <option value="" disabled selected><%= exame.getLoginPessoa().getNome()%></option>
+                                <option value="<%= exame.getLoginPessoa().getLogin()%>" selected><%= exame.getLoginPessoa().getLogin()%></option>
 
                                 <%
-                                    List<Usuario> usuarios = (List<Usuario>) request.getAttribute("usuario");
+                                    List<Usuario> usuarios = (List<Usuario>) request.getAttribute("usuarios");
                                     if (usuarios != null) {
                                         for (Usuario usu : usuarios) {
                                             if (!usu.getIsAdmin()) {
@@ -75,7 +75,7 @@
                         <div class="col s12">
                             <div class="input-field col s12 m6">
 
-                                <input type="checkbox" id="entregueCampo" name="entregue" />
+                                <input type="checkbox" id="entregueCampo" name="entregue" <%= exame.getIsEntregue()?"Checked":"" %>/>
 
                                 <label id="entregueLabel" for="entregueCampo">Foi entregue?</label>
 
@@ -96,7 +96,9 @@
 
                             <div class="input-field col s12 m6">
 
-                                <input  id="dataEntregaCampo" type="date" class="datepicker" name="dataEntrega" value="Data de entrega" value="<%= exame.getDataEntrega()%>">
+                                <input  id="dataEntregaCampo" type="text" class="datepicker" name="dataEntrega" value="<%= exame.getDataEntrega()%>">
+                                
+                                <label id="DataEntregaLabel" for="DataEntregaCampo">Data de entrega</label>
 
                             </div>                
 
@@ -113,11 +115,19 @@
                 </div>
 
                 <div class="card-action">
-
+                    <input type="hidden" name="pessoaAntiga" value="<%= exame.getLoginPessoa().getLogin()%>" />
+                    <input type="hidden" name="descricaoAntiga" value="<%= exame.getDescricao() %>" />
+                    <input type="hidden" name="custoAntigo" value="<%= exame.getCusto()%>" />                           
+                    
                     <button class="btn waves-effect red darken-4" type="submit" id="btn-cadastrar" name="page" value="ConfirmarEditarExame">
                         Confirmar
                         <i class="material-icons right">playlist_add</i>
                     </button>
+                    
+                    <a href="control?page=searchExames" class="btn waves-effect red darken-4" type="button" id="btn-voltar" >
+                        Voltar
+                        <i class="material-icons right">undo</i>
+                    </a>
                     
                 </div>
 
