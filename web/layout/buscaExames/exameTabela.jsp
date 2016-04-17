@@ -31,8 +31,8 @@
                                 <td>
                                     <form method="post" action="control">
                                         <input  id="loginCampo" type="hidden" name="descricao" maxlength="20" value="<%= exame.getDescricao() %>">
-                                        <input  id="sexoCampo" type="hidden" name="usuario" maxlength="1" value="<%= exame.getLoginPessoa() %>">
-                                        <input  id="enderecoCampo" type="hidden" name="custo"  value="<%= exame.getCusto() %>">
+                                        <input  id="sexoCampo" type="hidden" name="usuario" maxlength="1" value="<%= exame.getLoginPessoa().getLogin() %>">
+                                        <input  id="enderecoCampo" type="hidden" name="custo"  value="<%= exame.getCusto() %>">                                        
                                                                                
                                         <button class="btn-floating btn-flat waves-effect waves-circle blue darken-2" type="submit" name="page"  value="editarExame" >
                                             <i class="material-icons">edit</i>

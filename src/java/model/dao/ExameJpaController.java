@@ -184,4 +184,15 @@ public class ExameJpaController implements Serializable {
         
         return (List<Exame>) q.getResultList();
     }
+    
+    public Exame findExameByDescCustoUser(String descricao, Pessoa usuario, String custo){
+        String jpql = "select e from Exame e where e.descricao = :descricao and e.custo = :custo and e.loginPessoa = :usuario";
+        
+        Query q = getEntityManager().createQuery(jpql);
+        q.setParameter("descricao", descricao);
+        q.setParameter("custo", Double.parseDouble(custo));
+        q.setParameter("usuario", usuario);
+        
+        return (Exame) q.getSingleResult();
+    }
 }
