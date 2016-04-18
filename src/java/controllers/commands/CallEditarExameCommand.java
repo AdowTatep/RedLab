@@ -38,7 +38,7 @@ public class CallEditarExameCommand implements CommandApp {
         String loginPessoa = request.getParameter("pessoa");
         String descricaoExame = request.getParameter("descricao");
         String custo = request.getParameter("custo");
-        String entregue = request.getParameter("entregue");        
+        String entregue = request.getParameter("entregue") == null ? "" : request.getParameter("entregue");
         String jejum = request.getParameter("jejum");
         String dataEntrega = request.getParameter("dataEntrega");
         String horaEntrega = request.getParameter("horaEntrega");
