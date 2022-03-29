@@ -1,8 +1,5 @@
 # RedLab
-This is a project made in my college's first Java WEB half quarter. The idea was to learn JSP, Servlets etc.
 
-It's kind of a clinic adminstration system, where the Admin can add exams and the User can Sign up, and appoint exams(like blood exams). Then the doctor can mark if the exam is ready so that the user can go there and get the result. 
+A college project intended to learn JSP and servlets using java.
 
-The admin can manage how much the clinic has profited.
-
-It is just a learning project, so there is a lot of flaws since its just for the sake of learning Servlets and Java WEB
+A laboratory/clinic administration system, where the admin can request medical exams from users, and appoint exams(like blood exams, hence the name RedLab). Then the doctor can update whether the exam is ready or not so that the user can go there and get the results. The admin can manage how much the clinic has profited.
